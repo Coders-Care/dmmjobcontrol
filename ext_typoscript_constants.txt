@@ -1,0 +1,106 @@
+plugin.dmmjobcontrol {
+	## TEMPLATE FILES
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=file[html,htm,tmpl,txt]; label= List template: List view template
+	template.list = EXT:dmmjobcontrol/res/list.tmpl
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=file[html,htm,tmpl,txt]; label= Detail template: Detail view template
+	template.detail = EXT:dmmjobcontrol/res/detail.tmpl
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=file[html,htm,tmpl,txt]; label= Search template: Search form template
+	template.search = EXT:dmmjobcontrol/res/search.tmpl
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=file[html,htm,tmpl,txt]; label= RSS template: RSS list template
+	template.rss = EXT:dmmjobcontrol/res/rss.tmpl
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=file[html,htm,tmpl,txt]; label= Apply template: Apply form template
+	template.apply = EXT:dmmjobcontrol/res/apply.tmpl
+
+	## PIDS
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= List PID: PID of the page containing the list display
+	pid.list = 0
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Detail PID: PID of the page containing the detail display
+	pid.detail = 0
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Apply PID: PID of the page containing the external apply page (if used)
+	pid.apply = 0
+
+	## RSS
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= RSS title: The title to show in the RSS feed
+	rss.title = Vacancies
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= RSS description: The description to show in the RSS feed
+	rss.description = All vacancies
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=file[jpg,gif,png]; label= RSS image: The image shown on the RSS feed
+	rss.image = EXT:dmmjobcontrol/ext_icon.gif
+
+	## OTHER
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Limit: Limit the number of results, 0 is no limit
+	limit = 0
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Not found statuscode: Statuscode that will be given when a job is not found (see http://www.faqs.org/rfcs/rfc2616 for a list of codes)
+	notfound.statuscode = 404 Not Found
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= Not found handler: What to do when a job is not found. Set to a pid to redirect here, set to a string to display this text or leave empty to use the default text
+	notfound.handler =
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= HtmlMail: Send html email with uploaded CV as attachment
+	htmlmail = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= wrap_in_base_class: Wrap the plugin in a div with a base class	
+	wrap_in_base_class = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Recursive: Load sysfolders with jobs recursivly
+	recursive = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= substitutePageTitle: On the detail page show the job title as the page name
+	substitutePageTitle = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Apply form: Show the "apply online" form on the detail page. 0: no apply form, 1: inline apply form, 2: apply form on different page
+	apply.form = 2
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= Apply to: Where should the apply form be mailed to by default? Will not be used if a contact person is chosen for the job!
+	apply.to = info@example.com
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= Apply form required fields: Which fields are required? Comma seperated list. Possible values: fullname,email,motivation,cv,letter
+	apply.required = fullname,email,motivation
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Apply form spamblocker: Try to prevent spammers from using the form by using sessions
+	apply.spamblock = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Paged: Use in combination with limit to make paged lists
+	paged = 0
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Sort: How to sort the results
+	sort = crdate DESC
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Icon: Shows an icon behind the selectbox, 0 is no icon
+	show_icon = 0
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Hide empty: Don't show labels for empty values in the detailview
+	hide_empty = 1
+	
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Ignore search: Ignore the search session, useful for a list with the latest jobs
+	ignore_search = 0
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Ignore hidden: Ignore the hidden flag, useful for a list with all jobs
+	ignore_hidden = 0
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Regio multiple: Define multiple select
+	multipleselect.region = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Discipline multiple: Define multiple select
+	multipleselect.discipline = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Education multiple: Define multiple select
+	multipleselect.education = 1
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Sector multiple: Define multiple select
+	multipleselect.sector = 1
+
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Category multiple: Define multiple select
+	multipleselect.category = 1
+			
+}

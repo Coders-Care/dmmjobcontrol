@@ -1,0 +1,126 @@
+Available markers
+
+- Labels
+###CRDATE_LABEL###
+###REFERENCE_LABEL###
+###JOB_TITLE_LABEL###
+###EMPLOYER_LABEL###
+###EMPLOYER_DESCRIPTION_LABEL###
+###LOCATION_LABEL###
+###SHORT_JOB_DESCRIPTION_LABEL###
+###JOB_DESCRIPTION_LABEL###
+###EXPERIENCE_LABEL###
+###JOB_REQUIREMENTS_LABEL###
+###SALARY_LABEL###
+###JOB_TYPE_LABEL###
+###CONTRACT_TYPE_LABEL###
+###REGION_LABEL###
+###SECTOR_LABEL###
+###CATEGORY_LABEL###
+###DISCIPLINE_LABEL###
+###EDUCATION_LABEL###
+
+- Fields
+###CRDATE###
+###REFERENCE###
+###JOB_TITLE###
+###EMPLOYER###
+###EMPLOYER_DESCRIPTION###
+###LOCATION###
+###SHORT_JOB_DESCRIPTION###
+###JOB_DESCRIPTION###
+###EXPERIENCE###
+###JOB_REQUIREMENTS###
+###SALARY###
+###JOB_TYPE###
+###CONTRACT_TYPE###
+###REGION###
+###SECTOR###
+###CATEGORY###
+###DISCIPLINE###
+###EDUCATION###
+###CONTACT_NAME###
+###CONTACT_ADDRESS###
+###CONTACT_PHONE###
+###CONTACT_EMAIL###
+
+(You can add your own fields to JobControl, refer to the documentation for more info)
+
+- Others
+###LINKTOLIST###: only the url that goes into the href
+###BACKTOLIST###: only the text that you click on
+
+
+The html template for showing the detail page (including the apply form)
+<!-- ###TEMPLATE### begin -->
+
+	<h3>###CRDATE_LABEL###</h3>
+	<div>###CRDATE###</div>
+
+	<h3>###REFERENCE_LABEL###</h3>
+	<div>###REFERENCE###</div>
+
+	<h3>###JOB_TITLE_LABEL###</h3>
+	<div>###JOB_TITLE###</div>
+
+	<h3>###EMPLOYER_LABEL###</h3>
+	<div>###EMPLOYER###</div>
+
+	<h3>###EMPLOYER_DESCRIPTION_LABEL###</h3>
+	<div>###EMPLOYER_DESCRIPTION###</div>
+
+	<h3>###LOCATION_LABEL###</h3>
+	<div>###LOCATION###</div>
+
+	<h3>###JOB_DESCRIPTION_LABEL###</h3>
+	<div>###JOB_DESCRIPTION###</div>
+
+	<h3>###EXPERIENCE_LABEL###</h3>
+	<div>###EXPERIENCE###</div>
+
+	<h3>###JOB_REQUIREMENTS_LABEL###</h3>
+	<div>###JOB_REQUIREMENTS###</div>
+
+	<h3>###JOB_BENEFITS_LABEL###</h3>
+	<div>###JOB_BENEFITS###</div>
+
+	<h3>###APPLY_INFORMATION_LABEL###</h3>
+	<div>###APPLY_INFORMATION###</div>
+
+	<h3>###SALARY_LABEL###</h3>
+	<div>###SALARY###</div>
+
+	<h3>###JOB_TYPE_LABEL###</h3>
+	<div>###JOB_TYPE###</div>
+
+	<h3>###CONTRACT_TYPE_LABEL###</h3>
+	<div>###CONTRACT_TYPE###</div>
+
+	<h3>###REGION_LABEL###</h3>
+	<div>###REGION###</div>
+
+	<h3>###SECTOR_LABEL###</h3>
+	<div>###SECTOR###</div>
+
+	<h3>###CATEGORY_LABEL###</h3>
+	<div>###CATEGORY###</div>
+
+	<h3>###DISCIPLINE_LABEL###</h3>
+	<div>###DISCIPLINE###</div>
+
+	<h3>###EDUCATION_LABEL###</h3>
+	<div>###EDUCATION###</div>
+
+	<br /><br />
+
+	<!-- ###APPLY### begin -->
+		<a name="dmmjobcontrol_apply_href"></a>
+
+		###INCLUDE_APPLY_FORM###
+
+		<a ###APPLY_LINK_ATTRIBUTES### class="dmmjobcontrol_apply_link">###APPLY_LINK###</a> |
+	<!-- ###APPLY### end -->
+
+	<a href="###LINKTOLIST###" class="dmmjobcontrol_apply_backtolist">###BACKTOLIST###</a>
+
+<!-- ###TEMPLATE### end -->

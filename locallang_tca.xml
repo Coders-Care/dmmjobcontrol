@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>language labels for dmmjobcontrol BE forms</description>
+		<type>database</type>
+		<csh_table></csh_table>
+		<fileId>EXT:dmmjobcontrol/locallang_tca.xml</fileId>
+		<labelContext type="array">
+		</labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="dmmjobcontrol">JobControl</label>
+			<label index="dmmjobcontrol.pi_flexform.sheet_general">General Settings</label>
+			<label index="dmmjobcontrol.pi_flexform.what_to_display">What to display:</label>
+		</languageKey>
+		<languageKey index="nl" type="array">
+			<label index="dmmjobcontrol">JobControl</label>
+			<label index="dmmjobcontrol.pi_flexform.sheet_general">Algemene instellingen</label>
+			<label index="dmmjobcontrol.pi_flexform.what_to_display">Wat te tonen:</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="dmmjobcontrol">JobControl</label>
+			<label index="dmmjobcontrol.pi_flexform.sheet_general">Allgemeine Einstellungen</label>
+			<label index="dmmjobcontrol.pi_flexform.what_to_display">Was anzeigen:</label>
+		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="dmmjobcontrol">JobControl</label>
+			<label index="dmmjobcontrol.pi_flexform.sheet_general">Ustawienia ogólne</label>
+			<label index="dmmjobcontrol.pi_flexform.what_to_display">Co wyświetlać:</label>
+		</languageKey>
+		<languageKey index="dk" type="array">
+			<label index="dmmjobcontrol">JobControl</label>
+			<label index="dmmjobcontrol.pi_flexform.sheet_general">Generelle indstillinger</label>
+			<label index="dmmjobcontrol.pi_flexform.what_to_display">Hvad der skal vises:</label>
+		</languageKey>
+	</data>
+</T3locallang>

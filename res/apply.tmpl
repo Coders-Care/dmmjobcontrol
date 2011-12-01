@@ -1,0 +1,82 @@
+<!-- ###TEMPLATE### begin -->
+
+	<form ###FORM_ATTRIBUTES### id="dmmjobcontrol_apply_form">
+		<input type="hidden" name="###JOB_UID_NAME###" value="###JOB_UID_VALUE###" />
+		<input type="hidden" name="###SPAMBLOCK_NAME###" value="###SPAMBLOCK_VALUE###" />
+
+		<table cellspacing="0" class="dmmjobcontrol_apply_table">
+			<tr class="dmmjobcontrol_apply_tr">
+				<td class="dmmjobcontrol_apply_header" colspan="2">
+					###APPLY_HEADER###
+				</td>
+			</tr>
+			<tr class="dmmjobcontrol_apply_tr">
+				<td class="dmmjobcontrol_apply_td1">
+					###FULLNAME_LABEL###
+				</td>
+				<td class="dmmjobcontrol_apply_td2">
+					<input type="text" name="###FULLNAME_NAME###" value="###FULLNAME_VALUE###" class="dmmjobcontrol_input" />
+				</td>
+			</tr>
+			<tr class="dmmjobcontrol_apply_tr">
+				<td class="dmmjobcontrol_apply_td1">
+					###EMAIL_LABEL###
+				</td>
+				<td class="dmmjobcontrol_apply_td2">
+					<input type="text" name="###EMAIL_NAME###" value="###EMAIL_VALUE###" class="dmmjobcontrol_input" />
+				</td>
+			</tr>
+			<tr class="dmmjobcontrol_apply_tr">
+				<td class="dmmjobcontrol_apply_td1">
+					###CV_LABEL###
+				</td>
+				<td class="dmmjobcontrol_apply_td2">
+					<input type="file" name="###CV_NAME###" class="dmmjobcontrol_fileinput" onchange="checkExtension(this)" />
+				</td>
+			</tr>
+			<tr class="dmmjobcontrol_apply_tr">
+				<td class="dmmjobcontrol_apply_td1">
+					###MOTIVATION_LABEL###
+				</td>
+				<td class="dmmjobcontrol_apply_td2">
+					<textarea name="###MOTIVATION_NAME###" class="dmmjobcontrol_textarea"></textarea>
+				</td>
+			</tr>
+			<tr class="dmmjobcontrol_apply_tr">
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<input type="submit" name="###APPLY_NAME###" value="###APPLY_LABEL###" class="dmmjobcontrol_submit dmmjobcontrol_apply_submit" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+<!-- ###TEMPLATE### end -->
+
+The message that will be shown after applying for a job
+<!-- ###APPLY_THANKS_TEMPLATE### begin -->
+	<p>###APPLY_THANKS###</p>
+
+	<a href="###LINKTODETAIL###" class="dmmjobcontrol_apply_backtodetail">###BACKTOJOB###</a> |
+	<a href="###LINKTOLIST###" class="dmmjobcontrol_apply_backtolist">###BACKTOLIST###</a>
+<!-- ###APPLY_THANKS_TEMPLATE### end -->
+
+
+The HTML email that will be sent to you when some applies for a job
+<!-- ###HTML_EMAIL_TEMPLATE### begin -->
+	<p><b>###JOB_TITLE_LABEL###</b>: <a href="###LINKTODETAIL###">###JOB_TITLE###</a></p>
+	<p><b>###FULLNAME_LABEL###</b>: ###FULLNAME_VALUE###</p>
+	<p><b>###EMAIL_LABEL###</b>: ###EMAIL_VALUE###</p>
+	<p><b>###MOTIVATION_LABEL###</b>: ###MOTIVATION_VALUE###</p>
+<!-- ###HTML_EMAIL_TEMPLATE### end -->
+
+
+The plain text email that will be sent to you when some applies for a job
+<!-- ###TEXT_EMAIL_TEMPLATE### begin -->
+###JOB_TITLE_LABEL###: ###JOB_TITLE### (###LINKTODETAIL###)
+###FULLNAME_LABEL###: ###FULLNAME_VALUE###
+###EMAIL_LABEL###: ###EMAIL_VALUE###
+###MOTIVATION_LABEL###: ###MOTIVATION_VALUE###
+<!-- ###TEXT_EMAIL_TEMPLATE### end -->

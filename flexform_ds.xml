@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<T3DataStructure>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:dmmjobcontrol/locallang_tca.php:dmmjobcontrol.pi_flexform.sheet_general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+
+					<what_to_display>
+						<TCEforms>
+							<label>LLL:EXT:dmmjobcontrol/locallang_tca.php:dmmjobcontrol.pi_flexform.what_to_display</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LIST</numIndex>
+										<numIndex index="1">LIST</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">DETAIL</numIndex>
+										<numIndex index="1">DETAIL</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">SEARCH</numIndex>
+										<numIndex index="1">SEARCH</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">APPLY</numIndex>
+										<numIndex index="1">APPLY</numIndex>
+									</numIndex>
+								</items>
+								<minitems>0</minitems>
+								<maxitems>100</maxitems>
+								<size>6</size>
+								<multiple>0</multiple>
+								<selectedListStyle>width:150px</selectedListStyle>
+								<itemListStyle>width:150px</itemListStyle>
+							</config>
+						</TCEforms>
+					</what_to_display>
+
+	    	</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

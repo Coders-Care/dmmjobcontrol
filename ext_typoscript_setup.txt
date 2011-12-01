@@ -1,0 +1,65 @@
+plugin.tx_dmmjobcontrol_pi1 {
+	template {
+	  list = {$plugin.dmmjobcontrol.template.list}
+	  detail = {$plugin.dmmjobcontrol.template.detail}
+	  search = {$plugin.dmmjobcontrol.template.search}
+	  rss = {$plugin.dmmjobcontrol.template.rss}
+	  apply = {$plugin.dmmjobcontrol.template.apply}
+	}
+
+	pid {
+		list = {$plugin.dmmjobcontrol.pid.list}
+		detail = {$plugin.dmmjobcontrol.pid.detail}
+		apply = {$plugin.dmmjobcontrol.pid.apply}
+	}
+
+	apply {
+		form = {$plugin.dmmjobcontrol.apply.form}
+		to = {$plugin.dmmjobcontrol.apply.to}
+		required = {$plugin.dmmjobcontrol.apply.required}
+		spamblock = {$plugin.dmmjobcontrol.apply.spamblock}
+	}
+
+	rss {
+		title = {$plugin.dmmjobcontrol.rss.title}
+		description = {$plugin.dmmjobcontrol.rss.description}
+		image = {$plugin.dmmjobcontrol.rss.image}
+	}
+
+	notfound {
+		statuscode = {$plugin.dmmjobcontrol.notfound.statuscode}
+		handler = {$plugin.dmmjobcontrol.notfound.handler}
+	}
+
+	htmlmail = {$plugin.dmmjobcontrol.htmlmail}
+	recursive = {$plugin.dmmjobcontrol.recursive}
+	substitutePageTitle = {$plugin.dmmjobcontrol.substitutePageTitle}
+	limit = {$plugin.dmmjobcontrol.limit}
+	paged = {$plugin.dmmjobcontrol.paged}
+	sort = {$plugin.dmmjobcontrol.sort}
+	ignore_search = {$plugin.dmmjobcontrol.ignore_search}
+	ignore_hidden = {$plugin.dmmjobcontrol.ignore_hidden}
+	wrap_in_base_class = {$plugin.dmmjobcontrol.wrap_in_base_class}
+
+	show_icon = {$plugin.dmmjobcontrol.show_icon}
+	hide_empty = {$plugin.dmmjobcontrol.hide_empty}
+
+	general_stdWrap.parseFunc < tt_content.text.20.parseFunc
+	crdate_stdWrap.strftime = %b %e, %Y
+	employer_description_stdWrap < .general_stdWrap
+	job_description_stdWrap < .general_stdWrap
+	job_requirements_stdWrap < .general_stdWrap
+	job_benefits_stdWrap < .general_stdWrap
+	apply_information_stdWrap < .general_stdWrap
+	salary_stdWrap < .general_stdWrap
+	apply_required_stdWrap.wrap = |<span class="dmmjobcontrol_apply_required">*</span>
+	contact_address_stdWrap.br = 1
+
+	multipleselect {
+		region =     {$plugin.dmmjobcontrol.multipleselect.region}
+		discipline = {$plugin.dmmjobcontrol.multipleselect.discipline}
+		education =  {$plugin.dmmjobcontrol.multipleselect.education}
+		sector = {$plugin.dmmjobcontrol.multipleselect.sector}
+		category = {$plugin.dmmjobcontrol.multipleselect.category}
+	}
+}
