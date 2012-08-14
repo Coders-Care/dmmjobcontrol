@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="pl" datatype="plaintext" original="messages" date="2012-08-14T23:11:13Z" product-name="dmmjobcontrol">
+		<header/>
+		<body>
+			<trans-unit id="dmmjobcontrol" xml:space="preserve" approved="yes">
+				<source>JobControl</source>
+				<target>JobControl</target>
+			</trans-unit>
+			<trans-unit id="dmmjobcontrol.pi_flexform.sheet_general" xml:space="preserve" approved="yes">
+				<source>General Settings</source>
+				<target>Ustawienia ogólne</target>
+			</trans-unit>
+			<trans-unit id="dmmjobcontrol.pi_flexform.what_to_display" xml:space="preserve" approved="yes">
+				<source>What to display:</source>
+				<target>Co wyświetlać:</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

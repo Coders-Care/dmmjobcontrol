@@ -99,8 +99,6 @@ plugin.dmmjobcontrol {
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Sector multiple: Define multiple select
 	multipleselect.sector = 1
 
-
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Category multiple: Define multiple select
 	multipleselect.category = 1
-			
 }

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="nl" datatype="plaintext" original="messages" date="2012-08-14T23:11:00Z" product-name="dmmjobcontrol">
+		<header/>
+		<body>
+			<trans-unit id="tx_dmmjobcontrol_sector" xml:space="preserve" approved="yes">
+				<source>JobControl: Sector</source>
+				<target>JobControl: Branche</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_sector.name" xml:space="preserve" approved="yes">
+				<source>Sector</source>
+				<target>Branche</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_category" xml:space="preserve" approved="yes">
+				<source>JobControl: Category</source>
+				<target>JobControl: Functiegroep</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_category.name" xml:space="preserve" approved="yes">
+				<source>Category</source>
+				<target>Functiegroep</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_discipline" xml:space="preserve" approved="yes">
+				<source>JobControl: Discipline</source>
+				<target>JobControl: Vakgebied</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_discipline.name" xml:space="preserve" approved="yes">
+				<source>Discipline</source>
+				<target>Vakgebied</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_region" xml:space="preserve" approved="yes">
+				<source>JobControl: Region</source>
+				<target>JobControl: Provincie</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_region.name" xml:space="preserve" approved="yes">
+				<source>State</source>
+				<target>Provincie</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_education" xml:space="preserve" approved="yes">
+				<source>JobControl: Education level</source>
+				<target>JobControl: Opleidingsniveau</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_education.name" xml:space="preserve" approved="yes">
+				<source>Level</source>
+				<target>Niveau</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job" xml:space="preserve" approved="yes">
+				<source>JobControl: Job</source>
+				<target>JobControl: Vacature</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.reference" xml:space="preserve" approved="yes">
+				<source>Reference</source>
+				<target>Referentienummer</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_title" xml:space="preserve" approved="yes">
+				<source>Job title</source>
+				<target>Functienaam</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.employer" xml:space="preserve" approved="yes">
+				<source>Employer</source>
+				<target>Bedrijfsnaam</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.employer_description" xml:space="preserve" approved="yes">
+				<source>Employer description</source>
+				<target>Bedrijfsomschrijving</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.location" xml:space="preserve" approved="yes">
+				<source>Location</source>
+				<target>Lokatie</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.region" xml:space="preserve" approved="yes">
+				<source>Region</source>
+				<target>Provincie</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.short_job_description" xml:space="preserve" approved="yes">
+				<source>Short job description</source>
+				<target>Korte functieomschrijving</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_description" xml:space="preserve" approved="yes">
+				<source>Job description</source>
+				<target>Functieomschrijving</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.experience" xml:space="preserve" approved="yes">
+				<source>Experience</source>
+				<target>Ervaring</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_requirements" xml:space="preserve" approved="yes">
+				<source>Job requirements</source>
+				<target>Functieeisen</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_benefits" xml:space="preserve" approved="yes">
+				<source>Job benefits</source>
+				<target>Arbeidsvoorwaarden</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.apply_information" xml:space="preserve" approved="yes">
+				<source>Apply information</source>
+				<target>Sollicitatie procedure</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.salary" xml:space="preserve" approved="yes">
+				<source>Salary</source>
+				<target>Salaris</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type.I.0" xml:space="preserve" approved="yes">
+				<source>Parttime</source>
+				<target>Parttime</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type.I.1" xml:space="preserve" approved="yes">
+				<source>Fulltime</source>
+				<target>Fulltime</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type" xml:space="preserve" approved="yes">
+				<source>Job Type</source>
+				<target>Vacature type</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.0" xml:space="preserve" approved="yes">
+				<source>Temporary</source>
+				<target>Tijdelijk</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.1" xml:space="preserve" approved="yes">
+				<source>Permanent</source>
+				<target>Vast</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.2" xml:space="preserve" approved="yes">
+				<source>Project</source>
+				<target>Project</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.3" xml:space="preserve" approved="yes">
+				<source>Contract</source>
+				<target>Contract</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type" xml:space="preserve" approved="yes">
+				<source>Contract type</source>
+				<target>Dienstverband</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.sector" xml:space="preserve" approved="yes">
+				<source>Sector</source>
+				<target>Branche</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.category" xml:space="preserve" approved="yes">
+				<source>Job category</source>
+				<target>Functiegroep</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.discipline" xml:space="preserve" approved="yes">
+				<source>Discipline</source>
+				<target>Vakgebied</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.education" xml:space="preserve" approved="yes">
+				<source>Level of education</source>
+				<target>Opleidingsniveau</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contact" xml:space="preserve" approved="yes">
+				<source>Contact person</source>
+				<target>Contactpersoon</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact" xml:space="preserve" approved="yes">
+				<source>JobControl: Contact person</source>
+				<target>JobControl: Contactpersoon</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.name" xml:space="preserve" approved="yes">
+				<source>Name</source>
+				<target>Naam</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.address" xml:space="preserve" approved="yes">
+				<source>Address</source>
+				<target>Adres</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.phone" xml:space="preserve" approved="yes">
+				<source>Telephone</source>
+				<target>Telefoon</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.email" xml:space="preserve" approved="yes">
+				<source>Email</source>
+				<target>email</target>
+			</trans-unit>
+			<trans-unit id="tt_content.list_type_pi1" xml:space="preserve" approved="yes">
+				<source>JobControl</source>
+				<target>JobControl</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

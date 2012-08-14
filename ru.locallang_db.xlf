@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="ru" datatype="plaintext" original="messages" date="2012-08-14T23:11:00Z" product-name="dmmjobcontrol">
+		<header/>
+		<body>
+			<trans-unit id="tx_dmmjobcontrol_sector" xml:space="preserve" approved="yes">
+				<source>JobControl: Sector</source>
+				<target>JobControl: Сектор</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_sector.name" xml:space="preserve" approved="yes">
+				<source>Sector</source>
+				<target>Сектор</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_category" xml:space="preserve" approved="yes">
+				<source>JobControl: Category</source>
+				<target>JobControl: Категория</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_category.name" xml:space="preserve" approved="yes">
+				<source>Category</source>
+				<target>Категория</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_discipline" xml:space="preserve" approved="yes">
+				<source>JobControl: Discipline</source>
+				<target>JobControl: Дициплина</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_discipline.name" xml:space="preserve" approved="yes">
+				<source>Discipline</source>
+				<target>Дисциплина</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_region" xml:space="preserve" approved="yes">
+				<source>JobControl: Region</source>
+				<target>JobControl: Регион</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_region.name" xml:space="preserve" approved="yes">
+				<source>State</source>
+				<target>Регион</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_education" xml:space="preserve" approved="yes">
+				<source>JobControl: Education level</source>
+				<target>JobControl: Уровень образования</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_education.name" xml:space="preserve" approved="yes">
+				<source>Level</source>
+				<target>Уровень</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job" xml:space="preserve" approved="yes">
+				<source>JobControl: Job</source>
+				<target>JobControl: Работа</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.reference" xml:space="preserve" approved="yes">
+				<source>Reference</source>
+				<target>Ссылка</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_title" xml:space="preserve" approved="yes">
+				<source>Job title</source>
+				<target>Название работы</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.employer" xml:space="preserve" approved="yes">
+				<source>Employer</source>
+				<target>Работодатель</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.employer_description" xml:space="preserve" approved="yes">
+				<source>Employer description</source>
+				<target>Описание работодателя</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.location" xml:space="preserve" approved="yes">
+				<source>Location</source>
+				<target>Расположение</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.region" xml:space="preserve" approved="yes">
+				<source>Region</source>
+				<target>Регион</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.short_job_description" xml:space="preserve" approved="yes">
+				<source>Short job description</source>
+				<target>Краткое описание работы</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_description" xml:space="preserve" approved="yes">
+				<source>Job description</source>
+				<target>Описание работы</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.experience" xml:space="preserve" approved="yes">
+				<source>Experience</source>
+				<target>Опыт</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_requirements" xml:space="preserve" approved="yes">
+				<source>Job requirements</source>
+				<target>Требования</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_benefits" xml:space="preserve" approved="yes">
+				<source>Job benefits</source>
+				<target>Job benefits</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.apply_information" xml:space="preserve" approved="yes">
+				<source>Apply information</source>
+				<target>Apply information</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.salary" xml:space="preserve" approved="yes">
+				<source>Salary</source>
+				<target>Доход</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type.I.0" xml:space="preserve" approved="yes">
+				<source>Parttime</source>
+				<target>Частичная занятость</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type.I.1" xml:space="preserve" approved="yes">
+				<source>Fulltime</source>
+				<target>Полная занятость</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type" xml:space="preserve" approved="yes">
+				<source>Job Type</source>
+				<target>Тип работы</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.0" xml:space="preserve" approved="yes">
+				<source>Temporary</source>
+				<target>Временный</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.1" xml:space="preserve" approved="yes">
+				<source>Permanent</source>
+				<target>Постоянный</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.2" xml:space="preserve" approved="yes">
+				<source>Project</source>
+				<target>Проект</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.3" xml:space="preserve" approved="yes">
+				<source>Contract</source>
+				<target>Контракт</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type" xml:space="preserve" approved="yes">
+				<source>Contract type</source>
+				<target>Тип контракта</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.sector" xml:space="preserve" approved="yes">
+				<source>Sector</source>
+				<target>Сектор</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.category" xml:space="preserve" approved="yes">
+				<source>Job category</source>
+				<target>Категория работы</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.discipline" xml:space="preserve" approved="yes">
+				<source>Discipline</source>
+				<target>Дисциплина</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.education" xml:space="preserve" approved="yes">
+				<source>Level of education</source>
+				<target>Уровень образования</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contact" xml:space="preserve" approved="yes">
+				<source>Contact person</source>
+				<target>Contact person</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact" xml:space="preserve" approved="yes">
+				<source>JobControl: Contact person</source>
+				<target>JobControl: Contact person</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.name" xml:space="preserve" approved="yes">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.address" xml:space="preserve" approved="yes">
+				<source>Address</source>
+				<target>Address</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.phone" xml:space="preserve" approved="yes">
+				<source>Telephone</source>
+				<target>Telephone</target>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.email" xml:space="preserve" approved="yes">
+				<source>Email</source>
+				<target>Email</target>
+			</trans-unit>
+			<trans-unit id="tt_content.list_type_pi1" xml:space="preserve" approved="yes">
+				<source>JobControl</source>
+				<target>JobControl</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

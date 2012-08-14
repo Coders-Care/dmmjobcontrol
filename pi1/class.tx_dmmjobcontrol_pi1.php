@@ -2,7 +2,8 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2007-2010 DMM Websolutions <info@dmmw.nl>
+*  (c) 2007-2010 DMM Websolutions
+*  (c) 2011-2012 Kevin Renskers
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,14 +23,15 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_t3lib.'class.t3lib_htmlmail.php');
+require_once(PATH_t3lib.'mail/class.t3lib_mail_message.php');
 require_once(PATH_tslib.'class.tslib_pibase.php');
 require_once(t3lib_extMgm::extPath('lang').'lang.php');
 
 /**
  * Plugin 'JobControl' for the 'dmmjobcontrol' extension.
  *
- * @author Jan Wolters [DMM Websolutions] <jan@dmmw.nl>
+ * @author Kevin Renskers
+ * @author Jan Wolters
  * @package TYPO3
  * @subpackage tx_dmmjobcontrol
  */
@@ -70,7 +72,6 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		$GLOBALS['TSFE']->includeTCA();
 		t3lib_div::loadTCA('tx_dmmjobcontrol_job');
 
-
 		// Load the language-labels from locallang_db.xml, so we can actually get the values from a selectbox.
 		// Otherwise we would just see "1" instead of "fulltime" as a value. Sometimes TYPO3 is too complicated ;)
 		$this->lang = t3lib_div::makeInstance('language');
@@ -102,7 +103,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 		// Default whereadd statement added to all queries, so we don't show deleted jobs, or jobs that can't be shown yet/anymore
 		$this->whereAdd  = 'tx_dmmjobcontrol_job.pid IN ('.implode(',', $this->sysfolders).') AND tx_dmmjobcontrol_job.deleted=0 AND tx_dmmjobcontrol_job.starttime<='.time().' AND (tx_dmmjobcontrol_job.endtime=0 OR tx_dmmjobcontrol_job.endtime>'.time().')';
-		// check if hidden jobs should be shown
+
+		// Check if hidden jobs should be shown
 		if (!$this->conf['ignore_hidden']) {
 			$this->whereAdd .= ' AND tx_dmmjobcontrol_job.hidden=0';
 		}
@@ -117,12 +119,12 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		// If we came here from the search form, then save the searchvalues in the session so we can get them later
 		if (isset($this->piVars['search_submit'])) {
 			foreach ($this->piVars['search'] AS $field => $value) {
-				if (strlen($value) && $value != '-1') {
+				if (strlen($value) || is_array($value)) {
 					$searchArray['search'][$field] = $value;
 				}
 			}
 			$GLOBALS['TSFE']->fe_user->setKey('ses', $this->prefixId, $searchArray);
-			
+
 			// Redirect to the list page to solve the expired page problem
 			$listurl = $this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id);
 			header('Location: /'.$listurl);
@@ -233,10 +235,12 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->prefixId);
 			if (isset($session['search']) && $search = $session['search']) {
 				global $TCA;
+
 				foreach ($search AS $field => $value) {
 					if (is_array($value) && count($value) == 1 && current($value) == -1) {
 						continue;
 					}
+
 					if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'])) {
 						$table = $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'];
 						$tableAdd[] = $table;
@@ -286,7 +290,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		}
 
 		$sort = $this->conf['sort'] ? $this->conf['sort'] : 'crdate DESC';
-// var_dump($selectAdd, $tableAdd, $whereAdd, $sort, $limit);
+
 		// Finally exexute the query
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			implode(', ', $selectAdd),
@@ -827,7 +831,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		global $TCA;
 
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->prefixId);
-		
+
 		if (isset($this->conf['multipleselect.'][$field]) && $this->conf['multipleselect.'][$field] != 1) {
 			$multiple = ' multiple="multiple" size="'.$this->conf['multipleselect.'][$field].'"';
 		} else {

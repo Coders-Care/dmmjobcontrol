@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2012-08-14T23:11:00Z" product-name="dmmjobcontrol">
+		<header/>
+		<body>
+			<trans-unit id="tx_dmmjobcontrol_sector" xml:space="preserve">
+				<source>JobControl: Sector</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_sector.name" xml:space="preserve">
+				<source>Sector</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_category" xml:space="preserve">
+				<source>JobControl: Category</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_category.name" xml:space="preserve">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_discipline" xml:space="preserve">
+				<source>JobControl: Discipline</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_discipline.name" xml:space="preserve">
+				<source>Discipline</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_region" xml:space="preserve">
+				<source>JobControl: Region</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_region.name" xml:space="preserve">
+				<source>State</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_education" xml:space="preserve">
+				<source>JobControl: Education level</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_education.name" xml:space="preserve">
+				<source>Level</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job" xml:space="preserve">
+				<source>JobControl: Job</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.reference" xml:space="preserve">
+				<source>Reference</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_title" xml:space="preserve">
+				<source>Job title</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.employer" xml:space="preserve">
+				<source>Employer</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.employer_description" xml:space="preserve">
+				<source>Employer description</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.location" xml:space="preserve">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.region" xml:space="preserve">
+				<source>Region</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.short_job_description" xml:space="preserve">
+				<source>Short job description</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_description" xml:space="preserve">
+				<source>Job description</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.experience" xml:space="preserve">
+				<source>Experience</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_requirements" xml:space="preserve">
+				<source>Job requirements</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_benefits" xml:space="preserve">
+				<source>Job benefits</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.apply_information" xml:space="preserve">
+				<source>Apply information</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.salary" xml:space="preserve">
+				<source>Salary</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type.I.0" xml:space="preserve">
+				<source>Parttime</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type.I.1" xml:space="preserve">
+				<source>Fulltime</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.job_type" xml:space="preserve">
+				<source>Job Type</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.0" xml:space="preserve">
+				<source>Temporary</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.1" xml:space="preserve">
+				<source>Permanent</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.2" xml:space="preserve">
+				<source>Project</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type.I.3" xml:space="preserve">
+				<source>Contract</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contract_type" xml:space="preserve">
+				<source>Contract type</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.sector" xml:space="preserve">
+				<source>Sector</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.category" xml:space="preserve">
+				<source>Job category</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.discipline" xml:space="preserve">
+				<source>Discipline</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.education" xml:space="preserve">
+				<source>Level of education</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_job.contact" xml:space="preserve">
+				<source>Contact person</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact" xml:space="preserve">
+				<source>JobControl: Contact person</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.address" xml:space="preserve">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.phone" xml:space="preserve">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="tx_dmmjobcontrol_contact.email" xml:space="preserve">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tt_content.list_type_pi1" xml:space="preserve">
+				<source>JobControl</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
