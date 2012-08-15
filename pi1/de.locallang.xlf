@@ -167,30 +167,6 @@
 				<source>------</source>
 				<target>------</target>
 			</trans-unit>
-			<trans-unit id="form_select_region_text" xml:space="preserve" approved="yes">
-				<source>------</source>
-				<target>------</target>
-			</trans-unit>
-			<trans-unit id="form_select_discipline_text" xml:space="preserve" approved="yes">
-				<source>------</source>
-				<target>------</target>
-			</trans-unit>
-			<trans-unit id="form_select_education_text" xml:space="preserve" approved="yes">
-				<source>------</source>
-				<target>------</target>
-			</trans-unit>
-			<trans-unit id="form_select_sector_text" xml:space="preserve" approved="yes">
-				<source>------</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="form_select_category_text" xml:space="preserve" approved="yes">
-				<source>------</source>
-				<target>------</target>
-			</trans-unit>
-			<trans-unit id="form_select_contract_type_text" xml:space="preserve" approved="yes">
-				<source>------</source>
-				<target>------</target>
-			</trans-unit>
 			<trans-unit id="link_prev" xml:space="preserve" approved="yes">
 				<source>Previous page</source>
 				<target>vorherige Seite</target>
