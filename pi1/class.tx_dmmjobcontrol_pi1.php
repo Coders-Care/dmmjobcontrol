@@ -840,7 +840,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		
 		$return = '<select name="tx_dmmjobcontrol_pi1[search]['.$field.'][]" class="dmmjobcontrol_select dmmjobcontrol_'.$field.'"'.$multiple.'>';
 		if ($multiple == '') {
-			$return .= '<option value="-1">'.$this->pi_getLL('form_select_'.$field.'_text').'</option>';
+			$return .= '<option value="-1">'.$this->pi_getLL('form_select_text').'</option>';
 		}
 
 		if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'])) {
