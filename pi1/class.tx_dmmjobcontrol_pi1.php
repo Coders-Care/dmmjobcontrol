@@ -72,13 +72,6 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		$GLOBALS['TSFE']->includeTCA();
 		t3lib_div::loadTCA('tx_dmmjobcontrol_job');
 
-		// Load the language-labels from locallang_db.xml, so we can actually get the values from a selectbox.
-		// Otherwise we would just see "1" instead of "fulltime" as a value. Sometimes TYPO3 is too complicated ;)
-		$this->lang = t3lib_div::makeInstance('language');
-		$this->lang->init($this->LLkey);
-		$this->lang->lang = $this->LLkey;
-		$this->lang->includeLLFile('EXT:dmmjobcontrol/locallang_db.xml');
-
 		// Get the PID of the sysfolder where everything will be stored.
 		if (!is_null($this->cObj->data['pages'])) { // First look for 'startingpoint' config in the plugin
 			$this->startpoint = $this->cObj->data['pages'];
@@ -865,7 +858,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 					$selected = ' selected="selected"';
 				}
 
-				$return .= '<option value="'.$row[1].'"'.$selected.'>'.$this->lang->sL($row[0]).'</option>';
+				$return .= '<option value="'.$row[1].'"'.$selected.'>'.$GLOBALS['TSFE']->sL($row[0]).'</option>';
 			}
 		}
 
@@ -917,8 +910,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		$markerArray['###LINKTODETAIL###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['detail'] ? $this->conf['pid.']['detail'] : $GLOBALS['TSFE']->id, array( 'tx_dmmjobcontrol_pi1[job_uid]' => $row['uid'] )));
 		$markerArray['###LINKTOAPPLY###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['apply'] ? $this->conf['pid.']['apply'] : $GLOBALS['TSFE']->id, array( 'tx_dmmjobcontrol_pi1[job_uid]' => $row['uid'] )));
 		$markerArray['###LINKTOLIST###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id));
-		$markerArray['###JOB_TYPE###'] = $this->cObj->stdWrap($this->lang->getLL('tx_dmmjobcontrol_job.job_type.I.'.$row['job_type']), $this->conf['job_type_stdWrap.']);
-		$markerArray['###CONTRACT_TYPE###'] = $this->cObj->stdWrap($this->lang->getLL('tx_dmmjobcontrol_job.contract_type.I.'.$row['contract_type']), $this->conf['contract_type_stdWrap.']);
+		$markerArray['###JOB_TYPE###'] = $this->cObj->stdWrap($GLOBALS['TSFE']->sL('LLL:EXT:dmmjobcontrol/locallang_db.xml:tx_dmmjobcontrol_job.job_type.I.'.$row['job_type']), $this->conf['job_type_stdWrap.']);
+		$markerArray['###CONTRACT_TYPE###'] = $this->cObj->stdWrap($GLOBALS['TSFE']->sL('LLL:EXT:dmmjobcontrol/locallang_db.xml:tx_dmmjobcontrol_job.contract_type.I.'.$row['contract_type']), $this->conf['contract_type_stdWrap.']);
 
 		// Extend the markerArray with user function?
 		if (isset($this->conf['markerArrayFunction']) && $this->conf['markerArrayFunction']) {
