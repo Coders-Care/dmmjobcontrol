@@ -6,6 +6,10 @@
 	* Fixed localization of database values for TYPO3 4.6 and 4.7
 
 2010-07-16 Jan Wolters [DMM Websolutions]
+	* Version 2.4.1
+	* Author information updated
+
+2010-07-16 Jan Wolters [DMM Websolutions]
 	* Version 2.4.0
 	* Feature: in the TypoScript code you can now use the new config option "ignorehidden"
 	  Using this feature you can show hidden vacancies for testing
