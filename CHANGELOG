@@ -6,7 +6,7 @@
 * Version 2.5.0
 * Change: Moved localization files to XLIFF format
 * Bugfix: Now TYPO3 4.5, 4.6 and 4.7 compatible
-* Bugfix: Fixed dropdown boxes in search
+* Bugfix: Fixed selectboxes in search
 * Bugfix: Fixed localization of database values for TYPO3 4.6 and 4.7
 
 2010-07-16 Jan Wolters [DMM Websolutions]
@@ -25,7 +25,7 @@
 * Version 2.3.8
 * Feature: in the TypoScript code you can now use the new config option "multipleselect"
   Using this feature you can use a multiple select in the search for the fields region, 
-  disciplin, education, sector and category
+  discipline, education, sector and category
 
 2009-06-26 Kevin Renskers [DMM Development]
 * Version 2.3.7
@@ -38,7 +38,7 @@
 
 2009-06-04 Kevin Renskers [DMM Development]
 * Version 2.3.5
-* Bugfix: the function that finds the job_uid by searching the refence number has been 
+* Bugfix: the function that finds the job_uid by searching the reference number has been 
   fixed so that the right where's are being used in the query.
 
 2009-05-28 Kevin Renskers [DMM Development]
@@ -80,7 +80,7 @@
 
 2008-11-27 Kevin Renskers [DMM Development]
 * Version 2.2.0
-* Feature: details of logged in FE user get prefilled in the apply form
+* Feature: details of logged in FE user get pre-filled in the apply form
 
 2008-11-10 Kevin Renskers [DMM Development]
 * Version 2.1.0

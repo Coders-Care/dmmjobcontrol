@@ -21,7 +21,7 @@ JobControl was originally created in 2007 at DMM Websolutions in Groningen, The 
 * Tested with TYPO3 4.5, 4.6 and 4.7
 
 ## Documentation
-http://typo3.org/extension-manuals/dmmjobcontrol/current/
+You can read the documentation online at http://typo3.org/extension-manuals/dmmjobcontrol/current/.
 
 ## How to contribute
 For the code at https://github.com/kevinrenskers/dmmjobcontrol, create your own branch and code away. Submit a pull request and don't forget to add yourself to AUTHORS.
