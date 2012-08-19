@@ -1,17 +1,17 @@
 2012-08-19 Kevin Renskers [mixedCase]
 * Version 2.5.1
-* Updated README and documentation
+* Change: Updated README and documentation
 
 2012-08-15 Kevin Renskers [mixedCase]
 * Version 2.5.0
-* Now TYPO3 4.5, 4.6 and 4.7 compatible
-* Fixed dropdown boxes in search
-* Moved localization files to XLIFF format
-* Fixed localization of database values for TYPO3 4.6 and 4.7
+* Change: Moved localization files to XLIFF format
+* Bugfix: Now TYPO3 4.5, 4.6 and 4.7 compatible
+* Bugfix: Fixed dropdown boxes in search
+* Bugfix: Fixed localization of database values for TYPO3 4.6 and 4.7
 
 2010-07-16 Jan Wolters [DMM Websolutions]
 * Version 2.4.1
-* Author information updated
+* Change: Author information updated
 
 2010-07-16 Jan Wolters [DMM Websolutions]
 * Version 2.4.0
@@ -24,7 +24,8 @@
 2010-05-21 Jan Wolters [DMM Websolutions]
 * Version 2.3.8
 * Feature: in the TypoScript code you can now use the new config option "multipleselect"
-  Using this feature you can use a multiple select in the search for the fields region, disciplin, education, sector and category
+  Using this feature you can use a multiple select in the search for the fields region, 
+  disciplin, education, sector and category
 
 2009-06-26 Kevin Renskers [DMM Development]
 * Version 2.3.7
@@ -37,7 +38,8 @@
 
 2009-06-04 Kevin Renskers [DMM Development]
 * Version 2.3.5
-* Bugfix: the function that finds the job_uid by searching the refence number has been fixed so that the right where's are being used in the query.
+* Bugfix: the function that finds the job_uid by searching the refence number has been 
+  fixed so that the right where's are being used in the query.
 
 2009-05-28 Kevin Renskers [DMM Development]
 * Version 2.3.4
@@ -46,8 +48,8 @@
 2009-04-29 Kevin Renskers [DMM Development]
 * Version 2.3.3
 * Feature: added Danish translation (thanks Jesper Goos)
-* Change: the multilingual features have been greatly simplified. JobControl will only show jobs in the current language,
-  no more fall-back to default language if no translation has been entered, etc.
+* Change: the multilingual features have been greatly simplified. JobControl will only show jobs in 
+  the current language, no more fall-back to default language if no translation has been entered, etc.
 * Bugfix: searching for jobs in multilingual sites should work as expected now.
 
 2009-03-24 Kevin Renskers [DMM Development]
@@ -64,8 +66,10 @@
   Using this feature you have more control over the shown jobs in the list view.
   You do not need to begin with AND, this is done automatically.
   Example for showing only jobs in sector 1:
-  plugin.tx_dmmjobcontrol_pi1.whereadd = tx_dmmjobcontrol_job.uid IN (SELECT uid_local FROM tx_dmmjobcontrol_job_sector_mm WHERE uid_foreign=1)
-* Feature: it's now possible to extend the search form with your own fields, kinda like it was already possible for the detail view.
+    plugin.tx_dmmjobcontrol_pi1.whereadd = tx_dmmjobcontrol_job.uid IN 
+    (SELECT uid_local FROM tx_dmmjobcontrol_job_sector_mm WHERE uid_foreign=1)
+* Feature: it's now possible to extend the search form with your own fields, kinda like it was already possible 
+  for the detail view.
   See documention for more information.
 * Feature: added Polish translation (thanks Daniel Ciunkiewicz)
 
@@ -95,7 +99,8 @@
 * Version 1.15.6
 * Feature: a message will now be shown when no jobs are found (thanks Jan Wolters)
 * Bugfix: typo: employet_stdWrap renamed to employer_stdWrap (thanks Marcel Greter)
-* Bugfix: hideEmpty did not really work when you supplied your own wrappings (fields were never empty) (thanks Marcel Greter)
+* Bugfix: hideEmpty did not really work when you supplied your own wrappings 
+  (fields were never empty) (thanks Marcel Greter)
 
 2008-09-29 Kevin Renskers [DMM Development]
 * Version 1.15.5
@@ -107,7 +112,8 @@
 
 2008-07-08 Kevin Renskers [DMM Development]
 * Version 1.15.3
-* Bugfix: now using "additionalJavaScript" instead of "additionalHeaderData" so JavaScript can be put into external file
+* Bugfix: now using "additionalJavaScript" instead of "additionalHeaderData" 
+  so JavaScript can be put into external file
 * Bugfix: showing the apply form now TYPO3 4.2.1 compatible
 
 2008-05-27 Kevin Renskers [DMM Development]
@@ -120,14 +126,15 @@
 
 2008-05-19 Kevin Renskers [DMM Development]
 * Version 1.15.0
-* Feature: new spamblock feature added to the apply form, which is basically a session check but works fine for most simple "contact form spammers"
-  to use it, make sure this is in the apply form template:
+* Feature: new spamblock feature added to the apply form, which is basically a session check but works fine 
+  for most simple "contact form spammers" to use it, make sure this is in the apply form template:
   <input type="hidden" name="###SPAMBLOCK_NAME###" value="###SPAMBLOCK_VALUE###" />
 * Bugfix: the CV field can now really be a required field
 
 2008-04-29 Kevin Renskers [DMM Development]
 * Version 1.14.0
-* Feature: new "not found" handler: when a deleted job is requested you can give a custom error code, redirect to a page or show a message
+* Feature: new "not found" handler: when a deleted job is requested you can give a custom error code, 
+  redirect to a page or show a message
 
 2008-04-28 Kevin Renskers [DMM Development]
 * Version 1.13.0
@@ -205,7 +212,8 @@
 * Version 1.8.3
 * Feature: more examples in the markerArrayFunction.php file, better documented too
 * Feature: all fields now can have a stdWrap configuration added to them, see manual
-* Feature: better way of passing RTE content through the default parse function, user now has more control over individual fields
+* Feature: better way of passing RTE content through the default parse function, 
+  user now has more control over individual fields
 
 2007-09-04 Kevin Renskers [DMM Development]
 * Version 1.8.2
@@ -232,9 +240,10 @@
 2007-08-28 Kevin Renskers [DMM Development]
 * Version 1.6
 * Feature: better default templates: more classnames added to elements
-* Feature: the list can now be paginated ("Showing jobs 1 to 20 of 350") - see manual for updated realURL config example 
-  (thanks Thomas van de Pas for sponsoring the development of this feature)
-* Feature: the "road 2" approach can now be used without setting the "General Records Storage page" option (thanks Tomas Mrozek)
+* Feature: the list can now be paginated ("Showing jobs 1 to 20 of 350") - see manual for updated realURL 
+  config example  (thanks Thomas van de Pas for sponsoring the development of this feature)
+* Feature: the "road 2" approach can now be used without setting the "General Records Storage page" option 
+  (thanks Tomas Mrozek)
 * Bugfix: German translation doesn't break XML validation anymore
 
 2007-08-19 Kevin Renskers [DMM Development]
@@ -253,7 +262,8 @@
 * Feature: new German translation added (thanks Bjorn Reichert)
 * Bugfix: terrible spelling error, so I renamed all tables and fields from dicipline to discipline (note the s).
   Please !!BEFORE YOU UPDATE!! rename the tx_dmmjobcontrol_dicipline and tx_dmmjobcontrol_job_dicipline_mm tables,
-  and the tx_dmmjobcontrol_job.dicipline field (install the phpMyAdmin extension if you can't access your database any other way).
+  and the tx_dmmjobcontrol_job.dicipline field (install the phpMyAdmin extension if you can't access your database 
+  any other way).
   Also, if you use your own html templates, rename the template code from ###DICIPLINE### to ###DISCIPLINE###.
 
 2007-07-09 Kevin Renskers [DMM Development]
