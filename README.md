@@ -12,6 +12,7 @@ JobControl uses MM-relation tables for regions, branches, sectors etc. This mean
 JobControl is very easy to set up, with good default templates that can be styled to your needs using css stylesheets. It's very powerful and flexible too with lots of configuration options for advanced users.
 
 ## How to contribute
+For the code at https://github.com/kevinrenskers/dmmjobcontrol, create your own branch and code away. Submit a pull request and don't forget to add yourself to AUTHORS.
 
 ## License
 JobControl is free software under the terms of the
