@@ -11,6 +11,9 @@ JobControl is very easy to set up, with good default templates that can be style
 
 JobControl was originally created in 2007 at DMM Websolutions in Groningen, The Netherlands.
 
+## Documentation
+http://typo3.org/extension-manuals/dmmjobcontrol/current/
+
 ## How to contribute
 For the code at https://github.com/kevinrenskers/dmmjobcontrol, create your own branch and code away. Submit a pull request and don't forget to add yourself to AUTHORS.
 
