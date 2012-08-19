@@ -241,11 +241,11 @@
 	* Feature: now possible to search with keywords
 	* Feature: when searching, the values you are searching for are now shown in the searchform
 	* Feature: added a "reset" button in the searchform to clear it all and show all jobs again
-	* Thanks Björn Reichert for submitting code for the above changes
+	* Thanks Bjorn Reichert for submitting code for the above changes
 
 2007-07-10 Kevin Renskers [DMM Development]
 	* Version 1.3
-	* Feature: new German translation added (thanks Björn Reichert)
+	* Feature: new German translation added (thanks Bjorn Reichert)
 	* Bugfix: terrible spelling error, so I renamed all tables and fields from dicipline to discipline (note the s).
 	          Please !!BEFORE YOU UPDATE!! rename the tx_dmmjobcontrol_dicipline and tx_dmmjobcontrol_job_dicipline_mm tables,
 	          and the tx_dmmjobcontrol_job.dicipline field (install the phpMyAdmin extension if you can't access your database any other way).
