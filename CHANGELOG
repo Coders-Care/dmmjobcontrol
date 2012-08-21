@@ -1,17 +1,21 @@
+2012-08-21 Kevin Renskers [mixedCase]
+* Version 2.5.2
+* Bugfix: fixed sending mail (apply form)
+
 2012-08-19 Kevin Renskers [mixedCase]
 * Version 2.5.1
-* Change: Updated README and documentation
+* Change: updated README and documentation
 
 2012-08-15 Kevin Renskers [mixedCase]
 * Version 2.5.0
-* Change: Moved localization files to XLIFF format
-* Bugfix: Now TYPO3 4.5, 4.6 and 4.7 compatible
-* Bugfix: Fixed selectboxes in search
-* Bugfix: Fixed localization of database values for TYPO3 4.6 and 4.7
+* Change: moved localization files to XLIFF format
+* Bugfix: now TYPO3 4.5, 4.6 and 4.7 compatible
+* Bugfix: fixed selectboxes in search
+* Bugfix: fixed localization of database values for TYPO3 4.6 and 4.7
 
 2010-07-16 Jan Wolters [DMM Websolutions]
 * Version 2.4.1
-* Change: Author information updated
+* Change: author information updated
 
 2010-07-16 Jan Wolters [DMM Websolutions]
 * Version 2.4.0
@@ -43,7 +47,7 @@
 
 2009-05-28 Kevin Renskers [DMM Development]
 * Version 2.3.4
-* Minor updates to the documentation
+* Change: minor updates to the documentation
 
 2009-04-29 Kevin Renskers [DMM Development]
 * Version 2.3.3

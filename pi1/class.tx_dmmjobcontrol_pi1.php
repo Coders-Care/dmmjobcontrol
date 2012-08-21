@@ -452,37 +452,35 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 					if (isset($this->conf['htmlmail']) && $this->conf['htmlmail']) {
 						// Send HTML email with CV and letter as attachment
-						$htmlmailClass = t3lib_div::makeInstance('t3lib_htmlmail');
-						$htmlmailClass->start();
+						$htmlmailClass = t3lib_div::makeInstance('t3lib_mail_message');
 
-						$htmlmailClass->subject = $subject;
-						$htmlmailClass->from_email = $this->conf['apply.']['to'];
-						$htmlmailClass->from_name = $this->pi_getLL('mail_from_name');
-						$htmlmailClass->replyto_email = $this->conf['apply.']['to'];
-						$htmlmailClass->replyto_name = $this->pi_getLL('mail_from_name');
-						$htmlmailClass->organisation = '';
-						$htmlmailClass->priority = 3;
+						$htmlmailClass->setFrom(array($this->conf['apply.']['to']=> $this->pi_getLL('mail_from_name')));
+						$htmlmailClass->setReplyTo(array($this->conf['apply.']['to']=> $this->pi_getLL('mail_from_name')));
+						$htmlmailClass->setTo($this->conf['apply.']['to']);
+						$htmlmailClass->setSubject($subject);
+						$htmlmailClass->setBody($body);
 
 						// Add CV as attachment
 						if (isset($destination)) {
-							$htmlmailClass->addAttachment($destination);
-							t3lib_div::unlink_tempfile($destination);
+							$htmlmailClass->attach(Swift_Attachment::fromPath($destination));
 						}
 
 						// Add letter as attachment
 						if (isset($destination2)) {
-							$htmlmailClass->addAttachment($destination2);
-							t3lib_div::unlink_tempfile($destination2);
+							$htmlmailClass->attach(Swift_Attachment::fromPath($destination2));
 						}
 
-						$htmlmailClass->setHtml($htmlBody);
-						$htmlmailClass->setPlain($textBody);
+						$htmlmailClass->setBody($htmlBody, 'text/html');
+						$htmlmailClass->addPart($textBody, 'text/plain');
 
-						$htmlmailClass->setHeaders();
-						$htmlmailClass->setContent();
-						$htmlmailClass->setRecipient($this->conf['apply.']['to']);
+						$htmlmailClass->send();
 
-						$htmlmailClass->sendtheMail();
+						if (isset($destination)) {
+							t3lib_div::unlink_tempfile($destination);
+						}
+						if (isset($destination2)) {
+							t3lib_div::unlink_tempfile($destination2);
+						}
 					} else {
 						// Send plain text email, CV and letter as download links
 						if (isset($destination)) {
