@@ -112,7 +112,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		// If we came here from the search form, then save the searchvalues in the session so we can get them later
 		if (isset($this->piVars['search_submit'])) {
 			foreach ($this->piVars['search'] AS $field => $value) {
-				if (strlen($value) || is_array($value)) {
+				if (!(is_null($value) && strlen($value)) || is_array($value)) {
 					$searchArray['search'][$field] = $value;
 				}
 			}
