@@ -848,7 +848,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 				$return .= '<option value="'.$row['uid'].'"'.$selected.'>'.$row['name'].'</option>';
 			}
-		} else {
+		} elseif (is_array($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['items'])) {
 			// The values are in $TCA
 			foreach ($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['items'] AS $row) {
 				$selected = '';
