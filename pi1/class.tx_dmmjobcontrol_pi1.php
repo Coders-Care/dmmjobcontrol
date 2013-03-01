@@ -202,6 +202,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 	 * @return string The content that is displayed on the website
 	 */
 	function displayList($templateConf) {
+		global $TCA;
 		// Get the template
 		$this->templateCode = $this->cObj->fileResource($templateConf);
 		if (is_null($this->templateCode)) {
@@ -227,7 +228,6 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		if (!$this->rssMode && !$this->conf['ignore_search']) {
 			$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->prefixId);
 			if (isset($session['search']) && $search = $session['search']) {
-				global $TCA;
 
 				foreach ($search AS $field => $value) {
 					if (is_array($value) && count($value) == 1 && current($value) == -1) {
