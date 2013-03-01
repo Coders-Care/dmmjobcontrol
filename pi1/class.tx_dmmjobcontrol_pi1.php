@@ -418,7 +418,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 					if (isset($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']) && $_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']) {
 						// Add attachment to email
 						$fileInfo = pathinfo($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']);
-						if (t3lib_div::inList('doc,pdf,sxw,rtf,DOC,PDF,SXW,RTF', $fileInfo['extension']) && t3lib_div::verifyFilenameAgainstDenyPattern($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv'])) {
+						if (t3lib_div::inList('doc,docx,pdf,odt,sxw,rtf,zip,DOC,DOCX,PDF,ODT,SXW,RTF,ZIP', $fileInfo['extension']) && t3lib_div::verifyFilenameAgainstDenyPattern($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv'])) {
 							$source = $_FILES['tx_dmmjobcontrol_pi1']['tmp_name']['apply']['cv'];
 							$destination = PATH_site.'typo3temp/'.basename($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']);
 							t3lib_div::upload_copy_move($source, $destination);
@@ -432,7 +432,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 					if (isset($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']) && $_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']) {
 						// Add attachment to email
 						$fileInfo = pathinfo($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']);
-						if (t3lib_div::inList('doc,pdf,odt,sxw,rtf,DOC,PDF,ODT,SXW,RTF', $fileInfo['extension']) && t3lib_div::verifyFilenameAgainstDenyPattern($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter'])) {
+						if (t3lib_div::inList('doc,docx,pdf,odt,sxw,rtf,zip,DOC,DOCX,PDF,ODT,SXW,RTF,ZIP', $fileInfo['extension']) && t3lib_div::verifyFilenameAgainstDenyPattern($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter'])) {
 							$source2 = $_FILES['tx_dmmjobcontrol_pi1']['tmp_name']['apply']['letter'];
 							$destination2 = PATH_site.'typo3temp/'.basename($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']);
 							t3lib_div::upload_copy_move($source2, $destination2);
@@ -738,8 +738,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		// The javascript function to check the extension
 		$GLOBALS['TSFE']->additionalJavaScript[] = '
 			function checkExtension(obj) {
-				var extension = obj.value.substr((obj.value.length-3), 3);
-				if (!(extension=="doc" || extension=="pdf" || extension=="odt" || extension=="sxw" || extension=="rtf" || extension=="DOC" || extension=="PDF" || extension=="ODT" || extension=="SXW" || extension=="RTF")) {
+			var extension = obj.value.substr((obj.value.length-4), 4);
+			if (!(extension=="docx" || extension==".doc" || extension==".pdf" || extension==".odt" || extension==".sxw" || extension==".rtf" || extension==".zip" || extension=="DOCX" || extension==".DOC" || extension==".PDF" || extension==".ODT" || extension==".SXW" || extension==".RTF" || extension==".ZIP")) {
 					alert("'.$this->pi_getLL('wrong_document_type').'");
 					obj.value = "";
 				}
