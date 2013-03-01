@@ -282,7 +282,41 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$limit = (($this->piVars['page'] - 1) * $this->conf['limit']).', '.$limit;
 		}
 
-		$sort = $this->conf['sort'] ? $this->conf['sort'] : 'crdate DESC';
+        // sorting
+        $getSort = $this->piVars['sort'];
+        if ($getSort != '') {
+            // from URL
+            $sort = addslashes($getSort);
+            $getDirection = $this->piVars['sort_order'];
+            if ($getDirection != '' && in_array(strtolower($getDirection), array('asc', 'desc'))) {
+                $sort .= ' '.strtoupper($getDirection);
+            }
+        } else {
+            // from config or default
+			$sort = $this->conf['sort'] ? $this->conf['sort'] : 'crdate DESC';
+        }
+
+        // check related tables when sorting
+        $columnSort = explode(' ', $sort);
+        $column = $columnSort[0];
+        if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['MM'])) {
+            $joinTable = $TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['MM'];
+            $sortTable = $TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['foreign_table'];
+            // add tables
+            if (!in_array($joinTable, $tableAdd)) {
+                $tableAdd[] = $joinTable;
+                $whereAdd[] = $joinTable.'.uid_local=tx_dmmjobcontrol_job.uid';
+            }
+            if (!in_array($sortTable, $tableAdd)) {
+                $tableAdd[] = $sortTable;
+                $whereAdd[] = $joinTable.'.uid_foreign='.$sortTable.'.uid';
+            }
+
+            $sort = $sortTable.'.name';
+            if (isset($columnSort[1])) {
+                $sort .= ' '.$columnSort[1];
+            }
+        }
 
 		// Finally exexute the query
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
