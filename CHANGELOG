@@ -1,4 +1,10 @@
 2013-03-31 Kevin Renskers [mixedCase]
+* Version 2.7.0
+* It's now possible to set list sorting in the url like this:
+  ?tx_dmmjobcontrol_pi1[sort]=region&tx_dmmjobcontrol_pi1[sort_order]=asc
+  (thanks heikohaensge)
+
+2013-03-31 Kevin Renskers [mixedCase]
 * Version 2.6.0
 * Fixed some minor code style related things
 * Added possibility to sort properties like region, category and sector in the backend

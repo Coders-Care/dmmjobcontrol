@@ -48,10 +48,10 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 	var $sys_language_mode;
 	var $rssMode = false;
 	var $requiredFields = array();
-    var $recursive = 0;
-    var $whereAdd;
-    var $display;
-    var $templateCode;
+	var $recursive = 0;
+	var $whereAdd;
+	var $display;
+	var $templateCode;
 
 	/**
 	 * The main method that gets called when the plugin is showed in the frontend.
@@ -115,7 +115,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 		// If we came here from the search form, then save the searchvalues in the session so we can get them later
 		if (isset($this->piVars['search_submit'])) {
-            $searchArray = array();
+			$searchArray = array();
 			foreach ($this->piVars['search'] AS $field => $value) {
 				if (!(is_null($value) && strlen($value)) || is_array($value)) {
 					$searchArray['search'][$field] = $value;
@@ -297,43 +297,45 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$limit = (($this->piVars['page'] - 1) * $this->conf['limit']).', '.$limit;
 		}
 
-        // sorting
-        $getSort = $this->piVars['sort'];
-        if ($getSort != '') {
-            // from URL
-            $sort = addslashes($getSort);
-            $getDirection = $this->piVars['sort_order'];
-            if ($getDirection != '' && in_array(strtolower($getDirection), array('asc', 'desc'))) {
-                $sort .= ' '.strtoupper($getDirection);
-            }
-        } else {
-            // from config or default
+		// Sorting
+		$getSort = $this->piVars['sort'];
+		if ($getSort) {
+			// From URL
+			$sort = addslashes($getSort);
+			$getDirection = strtoupper($this->piVars['sort_order']);
+			if ($getDirection && in_array($getDirection, array('ASC', 'DESC'))) {
+				$sort .= ' ' . $getDirection;
+			}
+		} else {
+			// From config or default
 			$sort = $this->conf['sort'] ? $this->conf['sort'] : 'crdate DESC';
-        }
+		}
 
-        // check related tables when sorting
-        $columnSort = explode(' ', $sort);
-        $column = $columnSort[0];
-        if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['MM'])) {
-            $joinTable = $TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['MM'];
-            $sortTable = $TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['foreign_table'];
-            // add tables
-            if (!in_array($joinTable, $tableAdd)) {
-                $tableAdd[] = $joinTable;
-                $whereAdd[] = $joinTable.'.uid_local=tx_dmmjobcontrol_job.uid';
-            }
-            if (!in_array($sortTable, $tableAdd)) {
-                $tableAdd[] = $sortTable;
-                $whereAdd[] = $joinTable.'.uid_foreign='.$sortTable.'.uid';
-            }
+		// Check if we're sorting on a related table
+		$columnSort = explode(' ', $sort);
+		$column = $columnSort[0];
+		if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['MM'])) {
+			$joinTable = $TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['MM'];
+			$sortTable = $TCA['tx_dmmjobcontrol_job']['columns'][$column]['config']['foreign_table'];
 
-            $sort = $sortTable.'.name';
-            if (isset($columnSort[1])) {
-                $sort .= ' '.$columnSort[1];
-            }
-        }
+			// Add tables
+			if (!in_array($joinTable, $tableAdd)) {
+				$tableAdd[] = $joinTable;
+				$whereAdd[] = $joinTable . '.uid_local=tx_dmmjobcontrol_job.uid';
+			}
 
-		// Finally exexute the query
+			if (!in_array($sortTable, $tableAdd)) {
+				$tableAdd[] = $sortTable;
+				$whereAdd[] = $joinTable . '.uid_foreign=' . $sortTable . '.uid';
+			}
+
+			$sort = $sortTable . '.name';
+			if (isset($columnSort[1])) {
+				$sort .= ' ' . $columnSort[1];
+			}
+		}
+
+		// Finally execute the query
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			implode(', ', $selectAdd),
 			implode(', ', $tableAdd),
@@ -360,7 +362,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		}
 
 		$markerArray = $this->getLabels();
-        $wrappedMarkerArray = array();
+		$wrappedMarkerArray = array();
 
 		if (empty($template['sub_total_jobs'])) {
 			// Old style template, just ###TEMPLATE### that contains the pagebrowser and the rows/nothing found message
@@ -390,32 +392,32 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		} else {
 			// New style template, the ###TEMPLATE### contains ###TEMPLATE_NO_JOBS### and ###TEMPLATE_JOBS### subtemplates
 
-            if ($content) {
-                $subWrappedMarkerArray = array();
-                $subWrappedMarkerArray['###ROWS###'] = $content;
-                $subWrappedMarkerArray['###PAGEBROWSER###'] = '';
-                $subWrappedMarkerArray['###NUMBER_OF_JOBS###'] = $i;
-                $subWrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = '';
+			if ($content) {
+				$subWrappedMarkerArray = array();
+				$subWrappedMarkerArray['###ROWS###'] = $content;
+				$subWrappedMarkerArray['###PAGEBROWSER###'] = '';
+				$subWrappedMarkerArray['###NUMBER_OF_JOBS###'] = $i;
+				$subWrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = '';
 
-                // Paged lists (not for rss feeds)
-                if (!$this->rssMode && isset($this->conf['paged']) && $this->conf['paged'] && isset($this->conf['limit']) && $this->conf['limit']) {
-                    $template['pagebrowser'] = $this->cObj->getSubpart($template['total'], '###PAGEBROWSER###');
-                    $subWrappedMarkerArray['###PAGEBROWSER###'] = $this->getPageBrowser($template['pagebrowser'], $tableAdd, $whereAdd);
-                }
+				// Paged lists (not for rss feeds)
+				if (!$this->rssMode && isset($this->conf['paged']) && $this->conf['paged'] && isset($this->conf['limit']) && $this->conf['limit']) {
+					$template['pagebrowser'] = $this->cObj->getSubpart($template['total'], '###PAGEBROWSER###');
+					$subWrappedMarkerArray['###PAGEBROWSER###'] = $this->getPageBrowser($template['pagebrowser'], $tableAdd, $whereAdd);
+				}
 
-                // Show the rss logo image
-                if ($this->rssMode && isset($this->conf['rss.']['image']) && $this->conf['rss.']['image']) {
-                    $subWrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = $this->cObj->substituteMarkerArrayCached($template['rss'], $markerArray);
-                }
+				// Show the rss logo image
+				if ($this->rssMode && isset($this->conf['rss.']['image']) && $this->conf['rss.']['image']) {
+					$subWrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = $this->cObj->substituteMarkerArrayCached($template['rss'], $markerArray);
+				}
 
-                $content = $this->cObj->substituteMarkerArrayCached($template['sub_total_jobs'], $markerArray, $subWrappedMarkerArray);
-                $wrappedMarkerArray['###TEMPLATE_NO_JOBS###'] = '';
-                $wrappedMarkerArray['###TEMPLATE_JOBS###'] = $content;
-            } else {
-                $content = $this->cObj->substituteMarkerArrayCached($template['sub_total_no_jobs'], $markerArray);
-                $wrappedMarkerArray['###TEMPLATE_NO_JOBS###'] = $content;
-                $wrappedMarkerArray['###TEMPLATE_JOBS###'] = '';
-            }
+				$content = $this->cObj->substituteMarkerArrayCached($template['sub_total_jobs'], $markerArray, $subWrappedMarkerArray);
+				$wrappedMarkerArray['###TEMPLATE_NO_JOBS###'] = '';
+				$wrappedMarkerArray['###TEMPLATE_JOBS###'] = $content;
+			} else {
+				$content = $this->cObj->substituteMarkerArrayCached($template['sub_total_no_jobs'], $markerArray);
+				$wrappedMarkerArray['###TEMPLATE_NO_JOBS###'] = $content;
+				$wrappedMarkerArray['###TEMPLATE_JOBS###'] = '';
+			}
 
 			return $this->cObj->substituteMarkerArrayCached($template['total'], $markerArray, $wrappedMarkerArray);
 		}
@@ -925,7 +927,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$whereAdd = 'pid IN ('.implode(',', $this->sysfolders).')';
 			$whereAddLang = ' AND sys_language_uid='.$GLOBALS['TSFE']->sys_language_content;
 
-            $sort = $this->conf['property_sort'] ? $this->conf['property_sort'] : 'name ASC';
+			$sort = $this->conf['property_sort'] ? $this->conf['property_sort'] : 'name ASC';
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, name', $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['foreign_table'], $whereAdd.$whereAddLang, '', $sort);
 			while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 				$selected = '';
