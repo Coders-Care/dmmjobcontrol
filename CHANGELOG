@@ -1,24 +1,24 @@
 2013-03-31 Kevin Renskers [mixedCase]
 * Version 2.7.0
-* It's now possible to set list sorting in the url like this:
+* Feature: it's now possible to set list sorting in the url like this:
   ?tx_dmmjobcontrol_pi1[sort]=region&tx_dmmjobcontrol_pi1[sort_order]=asc
   (thanks Heiko Haensge)
 
 2013-03-31 Kevin Renskers [mixedCase]
 * Version 2.6.0
-* Fixed some minor code style related things
-* Added possibility to sort properties like region, category and sector in the backend
+* Feature: added possibility to sort properties like region, category and sector in the backend
   Usage: plugin.tx_dmmjobcontrol_pi1.property_sort = sorting ASC
-* In the backend the jobs table is now shown before all the others
-* The list template can now have TEMPLATE_NO_JOBS and TEMPLATE_JOBS subparts
+* Feature: the list template can now have TEMPLATE_NO_JOBS and TEMPLATE_JOBS subparts
   (see default list.tmpl for example)
+* Change: fixed some minor code style related things
+* Change: in the backend the jobs table is now shown before all the others
 * Thanks Klaus Prochart for sponsoring the development of these features
 
 2013-03-11 Kevin Renskers [mixedCase]
 * Version 2.5.3
 * Extension was tested in TYPO3 6.0, no problems were found
-* Fixed several PHP warnings (thanks Heiko Haensge)
-* Added docx and odt to allowed file extensions (thanks Jörgen van der Kroon)
+* Bugfix: fixed several PHP warnings (thanks Heiko Haensge)
+* Change: added docx and odt to allowed file extensions (thanks Jörgen van der Kroon)
 
 2012-08-21 Kevin Renskers [mixedCase]
 * Version 2.5.2
@@ -30,11 +30,11 @@
 
 2012-08-15 Kevin Renskers [mixedCase]
 * Version 2.5.0
-* JobControl is back!
-* Change: moved localization files to XLIFF format
+* JobControl is back and on GitHub (https://github.com/kevinrenskers/dmmjobcontrol)!
 * Bugfix: now TYPO3 4.5, 4.6 and 4.7 compatible
 * Bugfix: fixed selectboxes in search
 * Bugfix: fixed localization of database values for TYPO3 4.6 and 4.7
+* Change: moved localization files to XLIFF format
 
 2010-07-16 Jan Wolters [DMM Websolutions]
 * Version 2.4.1
