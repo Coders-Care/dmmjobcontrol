@@ -11,6 +11,7 @@ CREATE TABLE tx_dmmjobcontrol_sector (
     l18n_parent int(11) DEFAULT '0' NOT NULL,
     l18n_diffsource mediumblob NOT NULL,
     name tinytext NOT NULL,
+    sorting int(11) DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),
     KEY parent (pid)
@@ -31,6 +32,7 @@ CREATE TABLE tx_dmmjobcontrol_category (
     l18n_parent int(11) DEFAULT '0' NOT NULL,
     l18n_diffsource mediumblob NOT NULL,
     name tinytext NOT NULL,
+    sorting int(11) DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),
     KEY parent (pid)
@@ -51,6 +53,7 @@ CREATE TABLE tx_dmmjobcontrol_discipline (
     l18n_parent int(11) DEFAULT '0' NOT NULL,
     l18n_diffsource mediumblob NOT NULL,
     name tinytext NOT NULL,
+    sorting int(11) DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),
     KEY parent (pid)
@@ -71,6 +74,7 @@ CREATE TABLE tx_dmmjobcontrol_region (
     l18n_parent int(11) DEFAULT '0' NOT NULL,
     l18n_diffsource mediumblob NOT NULL,
     name tinytext NOT NULL,
+    sorting int(11) DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),
     KEY parent (pid)
@@ -91,6 +95,7 @@ CREATE TABLE tx_dmmjobcontrol_education (
     l18n_parent int(11) DEFAULT '0' NOT NULL,
     l18n_diffsource mediumblob NOT NULL,
     name tinytext NOT NULL,
+    sorting int(11) DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),
     KEY parent (pid)
@@ -235,6 +240,7 @@ CREATE TABLE tx_dmmjobcontrol_contact (
     address text NOT NULL,
     phone tinytext NOT NULL,
     email tinytext NOT NULL,
+    sorting int(11) DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),
     KEY parent (pid)

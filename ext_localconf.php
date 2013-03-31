@@ -3,6 +3,10 @@
 if (!defined ('TYPO3_MODE'))     die ('Access denied.');
 
 t3lib_extMgm::addUserTSConfig('
+    options.saveDocNew.tx_dmmjobcontrol_job=1
+');
+
+t3lib_extMgm::addUserTSConfig('
     options.saveDocNew.tx_dmmjobcontrol_sector=1
 ');
 
@@ -20,10 +24,6 @@ t3lib_extMgm::addUserTSConfig('
 
 t3lib_extMgm::addUserTSConfig('
     options.saveDocNew.tx_dmmjobcontrol_education=1
-');
-
-t3lib_extMgm::addUserTSConfig('
-    options.saveDocNew.tx_dmmjobcontrol_job=1
 ');
 
 t3lib_extMgm::addUserTSConfig('

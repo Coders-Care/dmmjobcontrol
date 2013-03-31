@@ -48,6 +48,10 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 	var $sys_language_mode;
 	var $rssMode = false;
 	var $requiredFields = array();
+    var $recursive = 0;
+    var $whereAdd;
+    var $display;
+    var $templateCode;
 
 	/**
 	 * The main method that gets called when the plugin is showed in the frontend.
@@ -77,7 +81,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$this->startpoint = $this->cObj->data['pages'];
 		} elseif ($storagePid = $GLOBALS['TSFE']->getStorageSiterootPids()) { // No startingpoint given, is there a storagepid given?
 			$this->startpoint = $storagePid['_STORAGE_PID'];
-		} else {																																 // Last resort: the current page itself
+		} else { // Last resort: the current page itself
 			$this->startpoint = $GLOBALS['TSFE']->id;
 		}
 
@@ -95,7 +99,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		}
 
 		// Default whereadd statement added to all queries, so we don't show deleted jobs, or jobs that can't be shown yet/anymore
-		$this->whereAdd  = 'tx_dmmjobcontrol_job.pid IN ('.implode(',', $this->sysfolders).') AND tx_dmmjobcontrol_job.deleted=0 AND tx_dmmjobcontrol_job.starttime<='.time().' AND (tx_dmmjobcontrol_job.endtime=0 OR tx_dmmjobcontrol_job.endtime>'.time().')';
+		$this->whereAdd = 'tx_dmmjobcontrol_job.pid IN ('.implode(',', $this->sysfolders).') AND tx_dmmjobcontrol_job.deleted=0 AND tx_dmmjobcontrol_job.starttime<='.time().' AND (tx_dmmjobcontrol_job.endtime=0 OR tx_dmmjobcontrol_job.endtime>'.time().')';
 
 		// Check if hidden jobs should be shown
 		if (!$this->conf['ignore_hidden']) {
@@ -111,6 +115,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 		// If we came here from the search form, then save the searchvalues in the session so we can get them later
 		if (isset($this->piVars['search_submit'])) {
+            $searchArray = array();
 			foreach ($this->piVars['search'] AS $field => $value) {
 				if (!(is_null($value) && strlen($value)) || is_array($value)) {
 					$searchArray['search'][$field] = $value;
@@ -210,8 +215,18 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 		// Get the parts out of the template
 		$template['total'] = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE###');
-		$template['rss'] = $this->cObj->getSubpart($template['total'], '###RSS_IMAGE_TEMPLATE###');
-		$template['rows'] = $this->cObj->getSubpart($template['total'], '###ROWS###');
+
+		// Optional TEMPLATE_JOBS and TEMPLATE_NO_JOBS subparts directly under the TEMPLATE root
+		$template['sub_total_jobs'] = $this->cObj->getSubpart($template['total'], '###TEMPLATE_JOBS###');
+		$template['sub_total_no_jobs'] = $this->cObj->getSubpart($template['total'], '###TEMPLATE_NO_JOBS###');
+
+		$key = 'total';
+		if (!empty($template['sub_total_jobs'])) {
+			$key = 'sub_total_jobs';
+		}
+
+		$template['rss'] = $this->cObj->getSubpart($template[$key], '###RSS_IMAGE_TEMPLATE###');
+		$template['rows'] = $this->cObj->getSubpart($template[$key], '###ROWS###');
 		$template['row'] = $this->cObj->getSubpart($template['rows'], '###ROW###');
 		$template['row_alt'] = $this->cObj->getSubpart($template['rows'], '###ROW_ALT###');
 		if (empty($template['row_alt'])) {
@@ -265,12 +280,12 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 				}
 			}
 		}
-		
+
 		// Is there an extra whereAdd given in the TypoScript code?
 		if (isset($this->conf['whereadd']) && $this->conf['whereadd']) {
 			$whereAdd[] = $this->conf['whereadd'];
 		}
-		
+
 		// Set limit on query
 		$limit = $this->conf['limit'] ? $this->conf['limit'] : '';
 
@@ -306,33 +321,70 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			} else {
 				$content .= $this->cObj->substituteMarkerArrayCached($template['row'], $markerArray);
 			}
-			
+
 			$i++;
 		}
 
-		$enablePageBrowser = true;
-		if (!$content) {
-			$content = $this->pi_getLL('no_jobs_found');
-			$enablePageBrowser = false;
-		}
-
 		$markerArray = $this->getLabels();
-		$wrappedMarkerArray['###ROWS###'] = $content;
-		$wrappedMarkerArray['###PAGEBROWSER###'] = '';
-		$wrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = '';
+        $wrappedMarkerArray = array();
 
-		// Paged lists (not for rss feeds)
-		if ($enablePageBrowser && !$this->rssMode && isset($this->conf['paged']) && $this->conf['paged'] && isset($this->conf['limit']) && $this->conf['limit']) {
-			$template['pagebrowser'] = $this->cObj->getSubpart($template['total'], '###PAGEBROWSER###');
-			$wrappedMarkerArray['###PAGEBROWSER###'] = $this->getPageBrowser($template['pagebrowser'], $tableAdd, $whereAdd);
+		if (empty($template['sub_total_jobs'])) {
+			// Old style template, just ###TEMPLATE### that contains the pagebrowser and the rows/nothing found message
+			$enablePageBrowser = true;
+			if (!$content) {
+				$content = $this->pi_getLL('no_jobs_found');
+				$enablePageBrowser = false;
+			}
+
+			$wrappedMarkerArray['###ROWS###'] = $content;
+			$wrappedMarkerArray['###PAGEBROWSER###'] = '';
+			$wrappedMarkerArray['###NUMBER_OF_JOBS###'] = $i;
+			$wrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = '';
+
+			// Paged lists (not for rss feeds)
+			if ($enablePageBrowser && !$this->rssMode && isset($this->conf['paged']) && $this->conf['paged'] && isset($this->conf['limit']) && $this->conf['limit']) {
+				$template['pagebrowser'] = $this->cObj->getSubpart($template['total'], '###PAGEBROWSER###');
+				$wrappedMarkerArray['###PAGEBROWSER###'] = $this->getPageBrowser($template['pagebrowser'], $tableAdd, $whereAdd);
+			}
+
+			// Show the rss logo image
+			if ($this->rssMode && isset($this->conf['rss.']['image']) && $this->conf['rss.']['image']) {
+				$wrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = $this->cObj->substituteMarkerArrayCached($template['rss'], $markerArray);
+			}
+
+			return $this->cObj->substituteMarkerArrayCached($template['total'], $markerArray, $wrappedMarkerArray);
+		} else {
+			// New style template, the ###TEMPLATE### contains ###TEMPLATE_NO_JOBS### and ###TEMPLATE_JOBS### subtemplates
+
+            if ($content) {
+                $subWrappedMarkerArray = array();
+                $subWrappedMarkerArray['###ROWS###'] = $content;
+                $subWrappedMarkerArray['###PAGEBROWSER###'] = '';
+                $subWrappedMarkerArray['###NUMBER_OF_JOBS###'] = $i;
+                $subWrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = '';
+
+                // Paged lists (not for rss feeds)
+                if (!$this->rssMode && isset($this->conf['paged']) && $this->conf['paged'] && isset($this->conf['limit']) && $this->conf['limit']) {
+                    $template['pagebrowser'] = $this->cObj->getSubpart($template['total'], '###PAGEBROWSER###');
+                    $subWrappedMarkerArray['###PAGEBROWSER###'] = $this->getPageBrowser($template['pagebrowser'], $tableAdd, $whereAdd);
+                }
+
+                // Show the rss logo image
+                if ($this->rssMode && isset($this->conf['rss.']['image']) && $this->conf['rss.']['image']) {
+                    $subWrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = $this->cObj->substituteMarkerArrayCached($template['rss'], $markerArray);
+                }
+
+                $content = $this->cObj->substituteMarkerArrayCached($template['sub_total_jobs'], $markerArray, $subWrappedMarkerArray);
+                $wrappedMarkerArray['###TEMPLATE_NO_JOBS###'] = '';
+                $wrappedMarkerArray['###TEMPLATE_JOBS###'] = $content;
+            } else {
+                $content = $this->cObj->substituteMarkerArrayCached($template['sub_total_no_jobs'], $markerArray);
+                $wrappedMarkerArray['###TEMPLATE_NO_JOBS###'] = $content;
+                $wrappedMarkerArray['###TEMPLATE_JOBS###'] = '';
+            }
+
+			return $this->cObj->substituteMarkerArrayCached($template['total'], $markerArray, $wrappedMarkerArray);
 		}
-
-		// Show the rss logo image
-		if ($this->rssMode && isset($this->conf['rss.']['image']) && $this->conf['rss.']['image']) {
-			$wrappedMarkerArray['###RSS_IMAGE_TEMPLATE###'] = $this->cObj->substituteMarkerArrayCached($template['rss'], $markerArray);
-		}
-
-		return $this->cObj->substituteMarkerArrayCached($template['total'], $markerArray, $wrappedMarkerArray);
 	}
 
 	/**
@@ -681,6 +733,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		$markerArray['###RSS_IMAGE###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->IMG_RESOURCE(array('file' => $this->conf['rss.']['image'])));
 		$markerArray['###LINKTOLIST###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list']?$this->conf['pid.']['list']:$GLOBALS['TSFE']->id));
 		$markerArray['###LANGUAGE###'] = $GLOBALS['TSFE']->config['config']['language'];
+		$markerArray['###NO_JOBS_FOUND###'] = $this->pi_getLL('no_jobs_found');
 
 		return $markerArray;
 	}
@@ -815,7 +868,6 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 	 * Create a selectbox for a given field. The values come either from a seperate table or from the $TCA array.
 	 *
 	 * @param string $field	The field for which to create the selectbox
-	 * @param string $select Can be either "single" or "multiple"
 	 * @return string The html to be inserted into the form
 	 */
 	function getFormSelect($field) {
@@ -828,7 +880,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		} else {
 			$multiple = '';
 		}
-		
+
 		$return = '<select name="tx_dmmjobcontrol_pi1[search]['.$field.'][]" class="dmmjobcontrol_select dmmjobcontrol_'.$field.'"'.$multiple.'>';
 		if ($multiple == '') {
 			$return .= '<option value="-1">'.$this->pi_getLL('form_select_text').'</option>';
@@ -839,7 +891,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$whereAdd = 'pid IN ('.implode(',', $this->sysfolders).')';
 			$whereAddLang = ' AND sys_language_uid='.$GLOBALS['TSFE']->sys_language_content;
 
-			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, name', $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['foreign_table'], $whereAdd.$whereAddLang, '', 'name');
+            $sort = $this->conf['property_sort'] ? $this->conf['property_sort'] : 'name ASC';
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, name', $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['foreign_table'], $whereAdd.$whereAddLang, '', $sort);
 			while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 				$selected = '';
 				if (isset($session['search'][$field]) && in_array($row['uid'], $session['search'][$field])) {
@@ -861,7 +914,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		}
 
 		$return .= '</select>';
-		
+
 		if ($this->conf['show_icon'] && $selected == ' selected="selected"') {
 			$return .= '<img class="dmmjobcontrol_selected_icon" src="typo3conf/ext/'.$this->extKey.'/icon_tx_dmmjobcontrol_arrow.gif" alt="" title="selected">';
 		}
@@ -986,7 +1039,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			'',
 			''
 		);
-		
+
 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		$totalJobs = $row['total'];
 

@@ -1,3 +1,12 @@
+Available subparts
+
+TEMPLATE
+TEMPLATE_NO_JOBS
+TEMPLATE_JOBS
+PAGEBROWSER
+ROWS
+ROW
+
 Available markers
 
 - Labels
@@ -19,6 +28,10 @@ Available markers
 ###CATEGORY_LABEL###
 ###DISCIPLINE_LABEL###
 ###EDUCATION_LABEL###
+###CONTACT_NAME_LABEL###
+###CONTACT_ADDRESS_LABEL###
+###CONTACT_PHONE_LABEL###
+###CONTACT_EMAIL_LABEL###
 
 - Fields
 ###CRDATE###
@@ -46,65 +59,88 @@ Available markers
 
 (You can add your own fields to JobControl, refer to the documentation for more info)
 
+- Pagebrowser (only available if there is at least one job found)
+###PAGEBROWSER_HEADER###
+###TOTAL_JOBS###
+###PAGE_FROM###
+###PAGE_TO###
+###LINK_PREV###
+###LINK_PREV_HREF###
+###LINK_PREV_TITLE###
+###LINK_NEXT###
+###LINK_NEXT_HREF###
+###LINK_NEXT_TITLE###
+###BROWSE_LINKS###
+###BROWSE_LINK_HREF###
+###BROWSE_LINK_TITLE###
+
 - Others
+###NUMBER_OF_JOBS###
+###NO_JOBS_FOUND###
 ###LINKTODETAIL###: only the url that goes into the href
 
 
 <!-- ###TEMPLATE### begin -->
 
-	<!-- ###PAGEBROWSER### begin -->
-		<div class="dmmjobcontrol_pagebrowser">
-			<div class="dmmjobcontrol_pagebrowser_header">###PAGEBROWSER_HEADER###</div>
+	<!-- ###TEMPLATE_NO_JOBS### begin -->
+		<p>###NO_JOBS_FOUND###</p>
+	<!-- ###TEMPLATE_NO_JOBS### end -->
 
-			<!-- ###LINK_PREV### begin -->
-				<a href="###LINK_PREV_HREF###" class="dmmjobcontrol_pagebrowser_prev">###LINK_PREV_TITLE###</a>
-			<!-- ###LINK_PREV### end -->
+	<!-- ###TEMPLATE_JOBS### begin -->
+		<!-- ###PAGEBROWSER### begin -->
+			<div class="dmmjobcontrol_pagebrowser">
+				<div class="dmmjobcontrol_pagebrowser_header">###PAGEBROWSER_HEADER###</div>
 
-			<!-- ###BROWSE_LINKS### begin -->
-				<!-- ###BROWSE_LINK### begin -->
-					<a href="###BROWSE_LINK_HREF###">###BROWSE_LINK_TITLE###</a>
-				<!-- ###BROWSE_LINK### end -->
-			<!-- ###BROWSE_LINKS### end -->
+				<!-- ###LINK_PREV### begin -->
+					<a href="###LINK_PREV_HREF###" class="dmmjobcontrol_pagebrowser_prev">###LINK_PREV_TITLE###</a>
+				<!-- ###LINK_PREV### end -->
 
-			<!-- ###LINK_NEXT### begin -->
-				<a href="###LINK_NEXT_HREF###" class="dmmjobcontrol_pagebrowser_next">###LINK_NEXT_TITLE###</a>
-			<!-- ###LINK_NEXT### end -->
-		</div>
-	<!-- ###PAGEBROWSER### end -->
+				<!-- ###BROWSE_LINKS### begin -->
+					<!-- ###BROWSE_LINK### begin -->
+						<a href="###BROWSE_LINK_HREF###">###BROWSE_LINK_TITLE###</a>
+					<!-- ###BROWSE_LINK### end -->
+				<!-- ###BROWSE_LINKS### end -->
 
-	<table cellspacing="0" class="dmmjobcontrol_list_table">
-		<tr>
-			<th class="dmmjobcontrol_list_th1">
-				###JOB_TITLE_LABEL###
-			</th>
-			<th class="dmmjobcontrol_list_th2">
-				###REGION_LABEL###
-			</th>
-		</tr>
+				<!-- ###LINK_NEXT### begin -->
+					<a href="###LINK_NEXT_HREF###" class="dmmjobcontrol_pagebrowser_next">###LINK_NEXT_TITLE###</a>
+				<!-- ###LINK_NEXT### end -->
+			</div>
+		<!-- ###PAGEBROWSER### end -->
 
-		<!-- ###ROWS### begin -->
-			<!-- ###ROW### begin -->
-				<tr class="dmmjobcontrol_list_tr">
-					<td>
-						<a href="###LINKTODETAIL###" title="###SHORT_JOB_DESCRIPTION###">###JOB_TITLE###</a>
-					</td>
-					<td>
-						###REGION###
-					</td>
-				</tr>
-			<!-- ###ROW### end -->
+		<table cellspacing="0" class="dmmjobcontrol_list_table">
+			<tr>
+				<th class="dmmjobcontrol_list_th1">
+					###JOB_TITLE_LABEL###
+				</th>
+				<th class="dmmjobcontrol_list_th2">
+					###REGION_LABEL###
+				</th>
+			</tr>
 
-			<!-- ###ROW_ALT### begin -->
-				<tr class="dmmjobcontrol_list_tr_alt">
-					<td>
-						<a href="###LINKTODETAIL###" title="###SHORT_JOB_DESCRIPTION###">###JOB_TITLE###</a>
-					</td>
-					<td>
-						###REGION###
-					</td>
-				</tr>
-			<!-- ###ROW_ALT### end -->
-		<!-- ###ROWS### end -->
-	</table>
+			<!-- ###ROWS### begin -->
+				<!-- ###ROW### begin -->
+					<tr class="dmmjobcontrol_list_tr">
+						<td>
+							<a href="###LINKTODETAIL###" title="###SHORT_JOB_DESCRIPTION###">###JOB_TITLE###</a>
+						</td>
+						<td>
+							###REGION###
+						</td>
+					</tr>
+				<!-- ###ROW### end -->
+
+				<!-- ###ROW_ALT### begin -->
+					<tr class="dmmjobcontrol_list_tr_alt">
+						<td>
+							<a href="###LINKTODETAIL###" title="###SHORT_JOB_DESCRIPTION###">###JOB_TITLE###</a>
+						</td>
+						<td>
+							###REGION###
+						</td>
+					</tr>
+				<!-- ###ROW_ALT### end -->
+			<!-- ###ROWS### end -->
+		</table>
+	<!-- ###TEMPLATE_JOBS### end -->
 
 <!-- ###TEMPLATE### end -->

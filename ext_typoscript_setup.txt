@@ -37,6 +37,7 @@ plugin.tx_dmmjobcontrol_pi1 {
 	limit = {$plugin.dmmjobcontrol.limit}
 	paged = {$plugin.dmmjobcontrol.paged}
 	sort = {$plugin.dmmjobcontrol.sort}
+	property_sort = {$plugin.dmmjobcontrol.property_sort}
 	ignore_search = {$plugin.dmmjobcontrol.ignore_search}
 	ignore_hidden = {$plugin.dmmjobcontrol.ignore_hidden}
 	wrap_in_base_class = {$plugin.dmmjobcontrol.wrap_in_base_class}
