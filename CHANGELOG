@@ -2,7 +2,7 @@
 * Version 2.7.0
 * It's now possible to set list sorting in the url like this:
   ?tx_dmmjobcontrol_pi1[sort]=region&tx_dmmjobcontrol_pi1[sort_order]=asc
-  (thanks heikohaensge)
+  (thanks Heiko Haensge)
 
 2013-03-31 Kevin Renskers [mixedCase]
 * Version 2.6.0
@@ -12,11 +12,13 @@
 * In the backend the jobs table is now shown before all the others
 * The list template can now have TEMPLATE_NO_JOBS and TEMPLATE_JOBS subparts
   (see default list.tmpl for example)
+* Thanks Klaus Prochart for sponsoring the development of these features
 
 2013-03-11 Kevin Renskers [mixedCase]
 * Version 2.5.3
-* Fixed several PHP warnings (thanks heikohaensge)
-* Added docx and odt to allowed file extensions (thanks Jorgen van der Kroon)
+* Extension was tested in TYPO3 6.0, no problems were found
+* Fixed several PHP warnings (thanks Heiko Haensge)
+* Added docx and odt to allowed file extensions (thanks Jörgen van der Kroon)
 
 2012-08-21 Kevin Renskers [mixedCase]
 * Version 2.5.2
@@ -28,6 +30,7 @@
 
 2012-08-15 Kevin Renskers [mixedCase]
 * Version 2.5.0
+* JobControl is back!
 * Change: moved localization files to XLIFF format
 * Bugfix: now TYPO3 4.5, 4.6 and 4.7 compatible
 * Bugfix: fixed selectboxes in search
@@ -82,7 +85,7 @@
 
 2009-01-29 Kevin Renskers [DMM Development]
 * Version 2.3.1
-* Bugfix: in rare situations, the selectboxes on the searchform could be empty (thanks Gaylord Gr�tzinger)
+* Bugfix: in rare situations, the selectboxes on the searchform could be empty (thanks Gaylord Grötzinger)
 
 2009-01-23 Kevin Renskers [DMM Development]
 * Version 2.3.0
@@ -117,7 +120,7 @@
 2008-11-04 Kevin Renskers [DMM Development]
 * Version 2.0.0
 * Feature: a new option "ignore_search" has been added, handy for lists that show the latest jobs (thanks Jan Wolters)
-* Bugfix: the hideEmpty change by Marcel had a small bug, causing "0" values to be considered empty
+* Bugfix: the hideEmpty change had a small bug, causing "0" values to be considered empty
 
 2008-10-30 Kevin Renskers [DMM Development]
 * Version 1.15.6
