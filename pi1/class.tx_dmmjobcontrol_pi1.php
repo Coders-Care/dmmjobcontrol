@@ -124,8 +124,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$GLOBALS['TSFE']->fe_user->setKey('ses', $this->prefixId, $searchArray);
 
 			// Redirect to the list page to solve the expired page problem
-			$listurl = $this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id);
-			header('Location: /'.$listurl);
+            $listurl = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id));
+			header('Location: '.$listurl);
 		}
 
 		// Reset the search
@@ -767,7 +767,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		$markerArray['###RSS_TITLE###'] = $this->cObj->stdWrap($this->conf['rss.']['title'], $this->conf['rss_title_stdWrap.']);
 		$markerArray['###RSS_DESCRIPTION###'] = $this->cObj->stdWrap($this->conf['rss.']['description'], $this->conf['rss_description_stdWrap.']);
 		$markerArray['###RSS_IMAGE###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->IMG_RESOURCE(array('file' => $this->conf['rss.']['image'])));
-		$markerArray['###LINKTOLIST###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list']?$this->conf['pid.']['list']:$GLOBALS['TSFE']->id));
+		$markerArray['###LINKTOLIST###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id));
 		$markerArray['###LANGUAGE###'] = $GLOBALS['TSFE']->config['config']['language'];
 		$markerArray['###NO_JOBS_FOUND###'] = $this->pi_getLL('no_jobs_found');
 
