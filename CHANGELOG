@@ -1,4 +1,11 @@
 2013-03-31 Kevin Renskers [mixedCase]
+* Version 2.7.1
+* Bugfix: changed default search form to have the reset button as the second button,
+  solving the problem that submitting with the enter button resets the search query
+* Bugfix: solved the "having no baseUrl breaks redirects" problem
+* Thanks Philipp Kitzberger for reporting these problems
+
+2013-03-31 Kevin Renskers [mixedCase]
 * Version 2.7.0
 * Feature: it's now possible to set list sorting in the url like this:
   ?tx_dmmjobcontrol_pi1[sort]=region&tx_dmmjobcontrol_pi1[sort_order]=asc
