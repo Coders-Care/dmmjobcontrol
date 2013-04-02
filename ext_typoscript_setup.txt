@@ -37,6 +37,15 @@ plugin.tx_dmmjobcontrol_pi1 {
 	limit = {$plugin.dmmjobcontrol.limit}
 	paged = {$plugin.dmmjobcontrol.paged}
 	sort = {$plugin.dmmjobcontrol.sort}
+
+	sort = {
+		region = $plugin.dmmjobcontrol.sort.region
+		discipline = $plugin.dmmjobcontrol.sort.discipline
+		education = $plugin.dmmjobcontrol.sort.education
+		sector = $plugin.dmmjobcontrol.sort.sector
+		category = $plugin.dmmjobcontrol.sort.category
+	}
+
 	property_sort = {$plugin.dmmjobcontrol.property_sort}
 	ignore_search = {$plugin.dmmjobcontrol.ignore_search}
 	ignore_hidden = {$plugin.dmmjobcontrol.ignore_hidden}

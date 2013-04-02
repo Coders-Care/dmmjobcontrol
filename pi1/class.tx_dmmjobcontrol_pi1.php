@@ -27,6 +27,8 @@ require_once(PATH_t3lib.'mail/class.t3lib_mail_message.php');
 require_once(PATH_tslib.'class.tslib_pibase.php');
 require_once(t3lib_extMgm::extPath('lang').'lang.php');
 
+error_reporting(E_STRICT);
+
 /**
  * Plugin 'JobControl' for the 'dmmjobcontrol' extension.
  *
@@ -281,7 +283,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			}
 		}
 
-		// Is there an extra whereAdd given in the TypoScript code?
+		// Is there an extra whereadd given in the TypoScript code?
 		if (isset($this->conf['whereadd']) && $this->conf['whereadd']) {
 			$whereAdd[] = $this->conf['whereadd'];
 		}
@@ -926,8 +928,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			// The values for the select come from another table
 			$whereAdd = 'pid IN ('.implode(',', $this->sysfolders).')';
 			$whereAddLang = ' AND sys_language_uid='.$GLOBALS['TSFE']->sys_language_content;
+			$sort = $this->conf['sort.'][$field] ? $this->conf['sort.'][$field] : ($this->conf['property_sort'] ? $this->conf['property_sort'] : 'name ASC');
 
-			$sort = $this->conf['property_sort'] ? $this->conf['property_sort'] : 'name ASC';
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, name', $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['foreign_table'], $whereAdd.$whereAddLang, '', $sort);
 			while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 				$selected = '';

@@ -75,8 +75,20 @@ plugin.dmmjobcontrol {
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Sort: How to sort the jobs (set to "sorting" to use the backend order)
 	sort = crdate DESC
 
-	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Property sort: How to sort the properties like sector, region, category (set to "sorting" to use the backend order)
-	property_sort = name ASC
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Region sort: How to sort the region (set to "sorting" to use the backend order)
+	sort.region = name ASC
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Discipline sort: How to sort the discipline (set to "sorting" to use the backend order)
+	sort.discipline = name ASC
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Education sort: How to sort the education (set to "sorting" to use the backend order)
+	sort.education = name ASC
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Sector sort: How to sort the sector (set to "sorting" to use the backend order)
+	sort.sector = name ASC
+
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label=Category sort: How to sort the category (set to "sorting" to use the backend order)
+	sort.category = name ASC
 
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Icon: Shows an icon behind the selectbox, 0 is no icon
 	show_icon = 0
@@ -90,18 +102,18 @@ plugin.dmmjobcontrol {
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Ignore hidden: Ignore the hidden flag, useful for a list with all jobs
 	ignore_hidden = 0
 
-	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Regio multiple: Define multiple select
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Region multiple: Define select size (>1 for multiple selection)
 	multipleselect.region = 1
 
-	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Discipline multiple: Define multiple select
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Discipline multiple: Define select size (>1 for multiple selection)
 	multipleselect.discipline = 1
 
-	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Education multiple: Define multiple select
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Education multiple: Define select size (>1 for multiple selection)
 	multipleselect.education = 1
 
-	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Sector multiple: Define multiple select
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Sector multiple: Define select size (>1 for multiple selection)
 	multipleselect.sector = 1
 
-	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Category multiple: Define multiple select
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label=Category multiple: Define select size (>1 for multiple selection)
 	multipleselect.category = 1
 }

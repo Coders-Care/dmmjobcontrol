@@ -1,3 +1,9 @@
+2013-04-02 Kevin Renskers [mixedCase]
+* Version 2.7.2
+* Change: better explanation of the "multiple" options in the constant editor
+* Change: 'property_sort' is replaced by the 'sort.' array, making it possible to set
+  a different sort config per property.
+
 2013-03-31 Kevin Renskers [mixedCase]
 * Version 2.7.1
 * Bugfix: changed default search form to have the reset button as the second button,
