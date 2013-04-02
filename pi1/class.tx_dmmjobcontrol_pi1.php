@@ -935,7 +935,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 					$selected = ' selected="selected"';
 				}
 
-				$return .= '<option value="'.$row['uid'].'"'.$selected.'>'.$row['name'].'</option>';
+				$return .= '<option value="'.$row['uid'].'"'.$selected.'>'.htmlspecialchars($row['name']).'</option>';
 			}
 		} elseif (is_array($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['items'])) {
 			// The values are in $TCA
