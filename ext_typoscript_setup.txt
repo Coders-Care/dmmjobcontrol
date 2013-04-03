@@ -38,12 +38,12 @@ plugin.tx_dmmjobcontrol_pi1 {
 	paged = {$plugin.dmmjobcontrol.paged}
 	sort = {$plugin.dmmjobcontrol.sort}
 
-	sort = {
-		region = $plugin.dmmjobcontrol.sort.region
-		discipline = $plugin.dmmjobcontrol.sort.discipline
-		education = $plugin.dmmjobcontrol.sort.education
-		sector = $plugin.dmmjobcontrol.sort.sector
-		category = $plugin.dmmjobcontrol.sort.category
+	sort {
+		region = {$plugin.dmmjobcontrol.sort.region}
+		discipline = {$plugin.dmmjobcontrol.sort.discipline}
+		education = {$plugin.dmmjobcontrol.sort.education}
+		sector = {$plugin.dmmjobcontrol.sort.sector}
+		category = {$plugin.dmmjobcontrol.sort.category}
 	}
 
 	property_sort = {$plugin.dmmjobcontrol.property_sort}
@@ -66,9 +66,9 @@ plugin.tx_dmmjobcontrol_pi1 {
 	contact_address_stdWrap.br = 1
 
 	multipleselect {
-		region =     {$plugin.dmmjobcontrol.multipleselect.region}
+		region = {$plugin.dmmjobcontrol.multipleselect.region}
 		discipline = {$plugin.dmmjobcontrol.multipleselect.discipline}
-		education =  {$plugin.dmmjobcontrol.multipleselect.education}
+		education = {$plugin.dmmjobcontrol.multipleselect.education}
 		sector = {$plugin.dmmjobcontrol.multipleselect.sector}
 		category = {$plugin.dmmjobcontrol.multipleselect.category}
 	}

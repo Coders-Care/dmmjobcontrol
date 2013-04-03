@@ -1,3 +1,7 @@
+2013-04-03 Kevin Renskers [mixedCase]
+* Version 2.7.3
+* Bugfix: fixed the included typoscript setup (thanks Klaus Prochart)
+
 2013-04-02 Kevin Renskers [mixedCase]
 * Version 2.7.2
 * Change: better explanation of the "multiple" options in the constant editor
