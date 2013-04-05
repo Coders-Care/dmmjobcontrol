@@ -69,6 +69,9 @@ plugin.dmmjobcontrol {
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Apply form spamblocker: Try to prevent spammers from using the form by using sessions
 	apply.spamblock = 1
 
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= Apply form allowed file extensions: Comma seperated list
+	apply.allowed_file_extensions = doc,docx,pdf,odt,sxw,rtf
+
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Paged: Use in combination with limit to make paged lists
 	paged = 0
 

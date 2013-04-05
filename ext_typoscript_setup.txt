@@ -18,6 +18,7 @@ plugin.tx_dmmjobcontrol_pi1 {
 		to = {$plugin.dmmjobcontrol.apply.to}
 		required = {$plugin.dmmjobcontrol.apply.required}
 		spamblock = {$plugin.dmmjobcontrol.apply.spamblock}
+		allowed_file_extensions = {$plugin.dmmjobcontrol.apply.allowed_file_extensions}
 	}
 
 	rss {

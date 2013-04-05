@@ -1,3 +1,10 @@
+2013-04-06 Kevin Renskers [mixedCase]
+* Version 2.8.0
+* Feature: it's now possible to have any number of file upload fields in the apply form
+  (thanks Klaus Prochart for sponsoring the development of this feature)
+* Feature: the list of allowed file extensions can now be configured in typoscript
+* Bugfix: fixed link to attachment in plain text email
+
 2013-04-03 Kevin Renskers [mixedCase]
 * Version 2.7.4
 * Bugfix: removed error_reporting(E_STRICT) accidentally left in (thanks Jan Schreier)

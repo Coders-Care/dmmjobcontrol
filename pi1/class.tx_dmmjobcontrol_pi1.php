@@ -258,7 +258,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 						$keywords = str_replace(array(','), ' ', $value);
 						$keywords = explode(' ', $keywords);
 
-						foreach ($keywords as $keyword) {
+						foreach ($keywords AS $keyword) {
 							$keyword = addslashes($keyword);
 
 							$whereAdd[] = '(tx_dmmjobcontrol_job.job_title LIKE "%'.$keyword.'%" OR '.
@@ -502,32 +502,34 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 					$template['textEmail'] = $this->cObj->getSubpart($this->templateCode, '###TEXT_EMAIL_TEMPLATE###');
 					$textBody  = $this->cObj->substituteMarkerArrayCached($template['textEmail'], $markerArray);
 
-					// The uploaded CV
-					if (isset($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']) && $_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']) {
-						// Add attachment to email
-						$fileInfo = pathinfo($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']);
-						if (t3lib_div::inList('doc,docx,pdf,odt,sxw,rtf,DOC,DOCX,PDF,ODT,SXW,RTF', $fileInfo['extension']) && t3lib_div::verifyFilenameAgainstDenyPattern($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv'])) {
-							$source = $_FILES['tx_dmmjobcontrol_pi1']['tmp_name']['apply']['cv'];
-							$destination = PATH_site.'typo3temp/'.basename($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']);
-							t3lib_div::upload_copy_move($source, $destination);
-						} else {
-							$htmlBody .= '<p><i>The uploaded CV "'.$_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv'].'" was not attached because it was not in a valid file format.</i></p>';
-							$textBody .= "\n\nThe uploaded CV ".$_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['cv']." was not attached because it was not in a valid file format.";
-						}
-					}
+					// The uploaded files
+                    $html_attachments = array();
+                    $text_attachments = array();
 
-					// The uploaded soll. letter
-					if (isset($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']) && $_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']) {
-						// Add attachment to email
-						$fileInfo = pathinfo($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']);
-						if (t3lib_div::inList('doc,docx,pdf,odt,sxw,rtf,DOC,DOCX,PDF,ODT,SXW,RTF', $fileInfo['extension']) && t3lib_div::verifyFilenameAgainstDenyPattern($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter'])) {
-							$source2 = $_FILES['tx_dmmjobcontrol_pi1']['tmp_name']['apply']['letter'];
-							$destination2 = PATH_site.'typo3temp/'.basename($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']);
-							t3lib_div::upload_copy_move($source2, $destination2);
-						} else {
-							$htmlBody .= '<p><i>The uploaded letter "'.$_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter'].'" was not attached because it was not in a valid file format.</i></p>';
-							$textBody .= "\n\nThe uploaded letter ".$_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']." was not attached because it was not in a valid file format.";
-						}
+                    if (isset($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['file']) && $_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['file']) {
+                        if (isset($this->conf['apply.']['allowed_file_extensions']) && $this->conf['apply.']['allowed_file_extensions']) {
+                            $allowed_file_extensions = $this->conf['apply.']['allowed_file_extensions'];
+                        } else {
+                            $allowed_file_extensions = 'doc,docx,pdf,odt,sxw,rtf';
+                        }
+
+                        foreach ($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['file'] AS $index => $name) {
+                            if ($name) {
+                                $fileInfo = pathinfo($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['file'][$index]);
+
+                                if (t3lib_div::inList($allowed_file_extensions, strtolower($fileInfo['extension'])) && t3lib_div::verifyFilenameAgainstDenyPattern($name)) {
+    	    						$source = $_FILES['tx_dmmjobcontrol_pi1']['tmp_name']['apply']['file'][$index];
+    	    						$destination = PATH_site.'typo3temp/'.$fileInfo['basename'];
+        							t3lib_div::upload_copy_move($source, $destination);
+
+                                    $html_attachments[] = $destination;
+                                    $text_attachments[] = $GLOBALS['TSFE']->baseUrlWrap('typo3temp/'.$fileInfo['basename']);
+                                } else {
+                                    $htmlBody .= '<p><i>The uploaded file "'.$fileInfo['basename'].'" was not attached because it was not in a valid file format.</i></p>';
+                                    $textBody .= "\n\nThe uploaded file ".$fileInfo['basename']." was not attached because it was not in a valid file format.";
+                                }
+                            }
+                        }
 					}
 
 					// Is there a contact person added to the job?
@@ -539,7 +541,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 					}
 
 					if (isset($this->conf['htmlmail']) && $this->conf['htmlmail']) {
-						// Send HTML email with CV and letter as attachment
+						// Send HTML email with file attachment(s)
 						$htmlmailClass = t3lib_div::makeInstance('t3lib_mail_message');
 
 						$htmlmailClass->setFrom(array($this->conf['apply.']['to']=> $this->pi_getLL('mail_from_name')));
@@ -549,13 +551,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 						$htmlmailClass->setBody($body);
 
 						// Add CV as attachment
-						if (isset($destination)) {
-							$htmlmailClass->attach(Swift_Attachment::fromPath($destination));
-						}
-
-						// Add letter as attachment
-						if (isset($destination2)) {
-							$htmlmailClass->attach(Swift_Attachment::fromPath($destination2));
+						foreach ($html_attachments AS $attachment) {
+							$htmlmailClass->attach(Swift_Attachment::fromPath($attachment));
 						}
 
 						$htmlmailClass->setBody($htmlBody, 'text/html');
@@ -563,20 +560,13 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 						$htmlmailClass->send();
 
-						if (isset($destination)) {
-							t3lib_div::unlink_tempfile($destination);
-						}
-						if (isset($destination2)) {
-							t3lib_div::unlink_tempfile($destination2);
+                        foreach ($html_attachments AS $attachment) {
+							t3lib_div::unlink_tempfile($attachment);
 						}
 					} else {
 						// Send plain text email, CV and letter as download links
-						if (isset($destination)) {
-							$textBody .= "\n\nUploaded CV: ".$GLOBALS['TSFE']->baseUrlWrap('/typo3temp/'.basename($_FILES['tx_dmmjobcontrol_pi1_cv']['name']));
-						}
-
-						if (isset($destination2)) {
-							$textBody .= "\n\nUploaded letter: ".$GLOBALS['TSFE']->baseUrlWrap('/typo3temp/'.basename($_FILES['tx_dmmjobcontrol_pi1']['name']['apply']['letter']));
+                        foreach ($text_attachments AS $attachment) {
+							$textBody .= "\n\nUploaded file: ".$attachment;
 						}
 
 						$this->cObj->sendNotifyEmail($subject."\n".$textBody, $this->conf['apply.']['to'], '', $this->conf['apply.']['to'], 'JobControl job application');
@@ -825,10 +815,26 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 	 */
 	function getApplyFormData($template, $markerArray) {
 		// The javascript function to check the extension
+
+        if (isset($this->conf['apply.']['allowed_file_extensions']) && $this->conf['apply.']['allowed_file_extensions']) {
+            $allowed_file_extensions = $this->conf['apply.']['allowed_file_extensions'];
+        } else {
+            $allowed_file_extensions = 'doc,docx,pdf,odt,sxw,rtf';
+        }
+
+        // Create array with the extensions in double quotes, for use in javascript
+        $allowed_file_extensions = explode(',', $allowed_file_extensions);
+        $allowed_file_extensions_array = array();
+        foreach ($allowed_file_extensions AS $extension) {
+            $allowed_file_extensions_array[] = '"'.trim($extension).'"';
+        }
+
 		$GLOBALS['TSFE']->additionalJavaScript[] = '
 			function checkExtension(obj) {
-				var extension = obj.value.substr((obj.value.length-3), 3);
-				if (!(extension=="doc" || extension=="ocx" || extension=="pdf" || extension=="odt" || extension=="sxw" || extension=="rtf" || extension=="DOC" || extension=="OCX" || extension=="PDF" || extension=="ODT" || extension=="SXW" || extension=="RTF")) {
+			    var parts = obj.value.split(".");
+                var extension = parts[parts.length-1].toLowerCase();
+                var allowed = ['.implode(',', $allowed_file_extensions_array).'];
+				if (allowed.indexOf(extension) == -1) {
 					alert("'.$this->pi_getLL('wrong_document_type').'");
 					obj.value = "";
 				}
@@ -882,8 +888,9 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		$markerArray['###FULLNAME_VALUE###'] = '';
 		$markerArray['###EMAIL_VALUE###'] = '';
 		$markerArray['###MOTIVATION_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][motivation]';
-		$markerArray['###CV_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][cv]';
-		$markerArray['###LETTER_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][letter]';
+		$markerArray['###CV_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][]';     # backwards compatibility
+		$markerArray['###LETTER_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][]'; # backwards compatibility
+        $markerArray['###FILE_UPLOAD_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][]';
 		$markerArray['###APPLY_NAME###'] = 'tx_dmmjobcontrol_pi1[apply_submit]';
 		$markerArray['###JOB_UID_NAME###'] = 'tx_dmmjobcontrol_pi1[job_uid]';
 		$markerArray['###JOB_UID_VALUE###'] = (int)$this->piVars['job_uid'];
@@ -1051,7 +1058,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		// Get contact info
 		$resMM = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_dmmjobcontrol_contact.*', 'tx_dmmjobcontrol_contact', 'tx_dmmjobcontrol_contact.uid='.$row['contact']);
 		if ($rowMM = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resMM)) {
-			foreach (array('name','address','phone','email') as $f) {
+			foreach (array('name','address','phone','email') AS $f) {
 				$markerArray['###'.strtoupper('contact_'.$f).'###'] = $this->cObj->stdWrap($rowMM[$f], $this->conf['contact_'.$f.'_stdWrap.']);
 			}
 		}
