@@ -1,3 +1,19 @@
+File uploads
+------------
+
+You can create multiple file upload fields like this:
+
+<input type="file" name="###FILE_UPLOAD_NAME###[cv]" class="dmmjobcontrol_fileinput" onchange="checkExtension(this)" />
+<input type="file" name="###FILE_UPLOAD_NAME###[letter]" class="dmmjobcontrol_fileinput" onchange="checkExtension(this)" />
+<input type="file" name="###FILE_UPLOAD_NAME###[motivation]" class="dmmjobcontrol_fileinput" onchange="checkExtension(this)" />
+
+The ###FILE_UPLOAD_NAME### part of the name always has to be there, followed by an unique file identifier between
+square brackets. The identifier corresponds to the label, so ###FILE_UPLOAD_NAME###[cv] goes with ###CV_LABEL###.
+
+To make a file upload field required, add it to the apply.required contant like so: file_cv, file_letter or file_motivation.
+The part after the underscore is the same as the file identifier between the square brackets.
+
+
 <!-- ###TEMPLATE### begin -->
 
 	<form ###FORM_ATTRIBUTES### id="dmmjobcontrol_apply_form">
@@ -31,7 +47,7 @@
 					###CV_LABEL###
 				</td>
 				<td class="dmmjobcontrol_apply_td2">
-					<input type="file" name="###FILE_UPLOAD_NAME###" class="dmmjobcontrol_fileinput" onchange="checkExtension(this)" />
+					<input type="file" name="###FILE_UPLOAD_NAME###[cv]" class="dmmjobcontrol_fileinput" onchange="checkExtension(this)" />
 				</td>
 			</tr>
 			<tr class="dmmjobcontrol_apply_tr">

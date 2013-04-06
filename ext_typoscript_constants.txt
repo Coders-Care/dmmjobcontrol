@@ -63,7 +63,7 @@ plugin.dmmjobcontrol {
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= Apply to: Where should the apply form be mailed to by default? Will not be used if a contact person is chosen for the job!
 	apply.to = info@example.com
 
-	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= Apply form required fields: Which fields are required? Comma seperated list. Possible values: fullname,email,motivation,cv,letter
+	# cat=plugin.tx_dmmjobcontrol_pi1//; type=string; label= Apply form required fields: Which fields are required? Comma seperated list. Possible values: fullname,email,motivation,file_cv,file_letter
 	apply.required = fullname,email,motivation
 
 	# cat=plugin.tx_dmmjobcontrol_pi1//; type=int+; label= Apply form spamblocker: Try to prevent spammers from using the form by using sessions

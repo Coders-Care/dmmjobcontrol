@@ -18,6 +18,7 @@
 			<label index='wrong_document_type'>This file is not allowed. You can only upload text documents.</label>
 			<label index='cv_label'>Upload your C.V.</label>
 			<label index='letter_label'>Upload your letter</label>
+            <label index='file_label'>Upload your file</label>
 			<label index='crdate_label'>Added on</label>
 			<label index='reference_label'>Reference number</label>
 			<label index='job_title_label'>Job title</label>
@@ -70,6 +71,7 @@
 			<label index='wrong_document_type'>Dit bestand is niet toegestaan. Alleen tekstdocumenten zijn toegestaan.</label>
 			<label index='cv_label'>Upload uw C.V.</label>
 			<label index='letter_label'>Upload uw sollicitatiebrief</label>
+            <label index='file_label'>Upload uw bestand</label>
 			<label index='crdate_label'>Geplaatst op</label>
 			<label index='reference_label'>Referentie</label>
 			<label index='job_title_label'>Functienaam</label>
@@ -125,6 +127,7 @@
 			<label index='wrong_document_type'>Dieses Dateiformat wird nicht unterst&amp;uuml;tzt! Sie k&amp;ouml;nnen nur Textdateien mitsenden.</label>
 			<label index='cv_label'>Ihren Lebenslauf mitsenden</label>
 			<label index='letter_label'>Ihr Schreiben mitsenden</label>
+            <label index='file_label'>Ihren Akte mitsenden</label>
 			<label index='crdate_label'>Eingestellt am</label>
 			<label index='reference_label'>Kennziffer</label>
 			<label index='job_title_label'>Stellenbeschreibung</label>
@@ -180,6 +183,7 @@
 			<label index='wrong_document_type'>Этот файл не принят. Вы можете загружать только текстовые документы.</label>
 			<label index='cv_label'>Загрузите Ваше C.V.</label>
 			<label index='letter_label'>Upload your letter</label>
+            <label index='file_label'>Upload your file</label>
 			<label index='crdate_label'>Добавлено</label>
 			<label index='reference_label'>Номер</label>
 			<label index='job_title_label'>Название вакансии</label>
@@ -232,6 +236,7 @@
 			<label index="wrong_document_type">Ten typ pliku jest niedozwolony. Możesz dołączyć jedynie dokumenty tekstowe.</label>
 			<label index="cv_label">Załaduj swoje CV</label>
 			<label index="letter_label">Załaduj swój list motywacyjny</label>
+            <label index='file_label'>Upload your file</label>
 			<label index="crdate_label">Dodane</label>
 			<label index="reference_label">Numer referencyjny</label>
 			<label index="job_title_label">Stanowisko</label>
@@ -284,6 +289,7 @@
 			<label index='wrong_document_type'>Denne fil er ikke tilladt. Du kan kun uploade tekstfiler.</label>
 			<label index='cv_label'>Upload dit C.V.</label>
 			<label index='letter_label'>Upload din ansøgning</label>
+            <label index='file_label'>Upload your file</label>
 			<label index='crdate_label'>Oprettet den</label>
 			<label index='reference_label'>Referance nummer</label>
 			<label index='job_title_label'>Job titel</label>

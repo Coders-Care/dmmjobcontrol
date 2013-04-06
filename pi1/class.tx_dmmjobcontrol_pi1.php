@@ -466,10 +466,9 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
 				// Process the form: send out email
 				if (isset($this->piVars['apply_submit'])) {
-					// Get the appy templates
+					// Get the apply templates
 					$this->templateCode = $this->cObj->fileResource($this->conf['template.']['apply']);
 					if (is_null($this->templateCode)) {
-
 						return $this->pi_getLL('template_not_found');
 					}
 
@@ -482,6 +481,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 							return $this->cObj->substituteMarkerArrayCached($template['thanks'], $markerArray);
 						}
 					}
+
+                    // TODO: server-side check for $this->requiredFields
 
 					// Extend the markerArray with the posted values
 					$markerArray['###FULLNAME_VALUE###'] = $this->piVars['apply']['fullname'];
@@ -726,6 +727,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			'MOTIVATION_LABEL',
 			'CV_LABEL',
 			'LETTER_LABEL',
+            'FILE_LABEL',
 			'APPLY_LINK',
 			'APPLY_THANKS',
 			'CONTACT_NAME_LABEL',
@@ -749,6 +751,10 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		// The labels for required apply form fields get one more stdWrap configuration
 		if (!isset($this->piVars['apply_submit'])) {
 			foreach ($this->requiredFields AS $requiredField) {
+                if (strpos($requiredField, 'file') === 0) {
+                    $requiredField = substr($requiredField, 5);
+                }
+
 				$markerArray['###'.strtoupper($requiredField).'_LABEL###'] = $this->cObj->stdWrap($markerArray['###'.strtoupper($requiredField).'_LABEL###'], $this->conf['apply_required_stdWrap.']);
 			}
 		}
@@ -849,12 +855,21 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 			$markerArray['###FORM_ATTRIBUTES###'] .= 'onsubmit="return checkRequiredFields(this);" ';
 
 			foreach ($this->requiredFields AS $requiredField) {
-				$check[] = '
-					if (obj.elements["tx_dmmjobcontrol_pi1[apply]['.$requiredField.']"].value == "") {
-						errorMsg = errorMsg + "\n - '.$this->pi_getLL($requiredField.'_label').'";
-						valid = false;
-					}
-				';
+                if (strpos($requiredField, 'file') === 0) {
+                    $file = substr($requiredField, 5);
+
+                    $check[] = 'var node = obj.elements["tx_dmmjobcontrol_pi1[apply][file]['.$file.']"];
+                                if (node.value == "") {
+                                    errorMsg = errorMsg + "\n - '.$this->pi_getLL($file.'_label').'";
+                                    valid = false;
+					            }';
+                } else {
+                    $check[] = 'var node = obj.elements["tx_dmmjobcontrol_pi1[apply]['.$requiredField.']"];
+                                if (node.value == "") {
+						            errorMsg = errorMsg + "\n - '.$this->pi_getLL($requiredField.'_label').'";
+						            valid = false;
+					            }';
+                }
 			}
 
 			$GLOBALS['TSFE']->additionalJavaScript[] = '
@@ -888,9 +903,9 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 		$markerArray['###FULLNAME_VALUE###'] = '';
 		$markerArray['###EMAIL_VALUE###'] = '';
 		$markerArray['###MOTIVATION_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][motivation]';
-		$markerArray['###CV_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][]';     # backwards compatibility
-		$markerArray['###LETTER_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][]'; # backwards compatibility
-        $markerArray['###FILE_UPLOAD_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][]';
+		$markerArray['###CV_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][cv]';         # backwards compatibility
+		$markerArray['###LETTER_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][letter]'; # backwards compatibility
+        $markerArray['###FILE_UPLOAD_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file]';
 		$markerArray['###APPLY_NAME###'] = 'tx_dmmjobcontrol_pi1[apply_submit]';
 		$markerArray['###JOB_UID_NAME###'] = 'tx_dmmjobcontrol_pi1[job_uid]';
 		$markerArray['###JOB_UID_VALUE###'] = (int)$this->piVars['job_uid'];
@@ -1152,6 +1167,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 	 *
 	 * @param array $labels The label marker array
 	 * @param array $values The array holding the job data marker array
+     * @param array $row The database row
 	 * @return array The combined markerArray that will be inserted into the detail template
 	 */
 	function hideEmpty($labels, $values, $row) {

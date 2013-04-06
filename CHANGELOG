@@ -1,4 +1,11 @@
 2013-04-06 Kevin Renskers [mixedCase]
+* Version 2.8.1
+* Bugfix: the changes in 2.8.0 caused file upload fields to no longer be required.
+  Please note that the fix caused a backwards incompatible change in the default apply form.
+  Check the supplied default apply.tmpl for the new usage of file upload fields if you're
+  using a custom apply form.
+
+2013-04-06 Kevin Renskers [mixedCase]
 * Version 2.8.0
 * Feature: it's now possible to have any number of file upload fields in the apply form
   (thanks Klaus Prochart for sponsoring the development of this feature)
