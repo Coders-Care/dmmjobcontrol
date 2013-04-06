@@ -24,12 +24,15 @@ JobControl was originally created in 2007 at DMM Websolutions in Groningen, The 
 You can read the documentation online at http://typo3.org/extension-manuals/dmmjobcontrol/current/.
 
 ## How to contribute
-I haven't worked with PHP or TYPO3 since 2009 and other then maintaining this extension so it runs on 4.5, 4.6 and 4.7, new features will have to come from the community.
-
 Feel free to fork the code at https://github.com/kevinrenskers/dmmjobcontrol and code away. Submit a pull request and don't forget to add yourself to AUTHORS.
+
+As I don't use TYPO3 myself anymore, new features will either have to come from the community, or have to be sponsored.
 
 ### Bugtracker
 Found a bug? Please file an issue at https://github.com/kevinrenskers/dmmjobcontrol/issues.
+
+## Support
+Use the [mailing lists](http://typo3.org/support/mailing-lists/) for free support, or hire me for paid support.
 
 ## License
 JobControl is free software under the terms of the
