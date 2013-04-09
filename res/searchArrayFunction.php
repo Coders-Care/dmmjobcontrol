@@ -8,7 +8,7 @@
  * If in one of these examples it is prefixed with tx_, you should keep that prefix as well.
  *
  * @param array $markerArray The original markerArray
- * @param array $conf Contains 1 important element, with key 'parant'. See example code below.
+ * @param array $conf Contains 1 important element, with key 'parent'. See example code below.
  * @return array The changed (extended) markerArray
  */
 function user_searchArrayFunction($markerArray, $conf) {

@@ -8,10 +8,10 @@
  * If in one of these examples it is prefixed with tx_, you should keep that prefix as well.
  *
  * @param array $markerArray The original markerArray
- * @param array $conf Contains 2 important elements, with keys row and parant. See example code below.
+ * @param array $conf Contains 2 important elements, with keys row and parent. See example code below.
  * @return array The changed (extended) markerArray
  */
-function user_markerArrayFunction($markerArray, $conf){
+function user_markerArrayFunction($markerArray, $conf) {
 	// The row from the database containing the job.
 	$row = $conf['row'];
 

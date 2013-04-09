@@ -1,3 +1,9 @@
+2013-04-09 Kevin Renskers [mixedCase]
+* Version 2.9.0
+* Feature: it's now possible to extend the available (multi-lingual) labels
+  via the labelArrayFunction. See documentation and example labelArrayFunction.php.
+* Note, this deprecates the non-documented labelMarkersFunction feature.
+
 2013-04-06 Kevin Renskers [mixedCase]
 * Version 2.8.1
 * Bugfix: the changes in 2.8.0 caused file upload fields to no longer be required.
