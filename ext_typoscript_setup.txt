@@ -57,6 +57,7 @@ plugin.tx_dmmjobcontrol_pi1 {
 
 	general_stdWrap.parseFunc < tt_content.text.20.parseFunc
 	crdate_stdWrap.strftime = %b %e, %Y
+	tstamp_stdWrap.strftime = %b %e, %Y
 	employer_description_stdWrap < .general_stdWrap
 	job_description_stdWrap < .general_stdWrap
 	job_requirements_stdWrap < .general_stdWrap

@@ -1,3 +1,10 @@
+2013-04-11 Kevin Renskers [mixedCase]
+* Version 2.10.0
+* Feature: added ###TSTAMP### marker and ###TSTAMP_LABEL### label
+* Change: documentation moved to http://mixedcase.nl/projects/dmmjobcontrol/
+* Change: removed the XLIFF language files until I can figure out how to support
+  this format without duplicating all my work.
+
 2013-04-09 Kevin Renskers [mixedCase]
 * Version 2.9.0
 * Feature: it's now possible to extend the available (multi-lingual) labels

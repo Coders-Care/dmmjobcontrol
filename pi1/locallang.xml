@@ -20,6 +20,7 @@
 			<label index='letter_label'>Upload your letter</label>
             <label index='file_label'>Upload your file</label>
 			<label index='crdate_label'>Added on</label>
+            <label index='tstamp_label'>Last modified on</label>
 			<label index='reference_label'>Reference number</label>
 			<label index='job_title_label'>Job title</label>
 			<label index='employer_label'>Employer</label>
@@ -73,6 +74,7 @@
 			<label index='letter_label'>Upload uw sollicitatiebrief</label>
             <label index='file_label'>Upload uw bestand</label>
 			<label index='crdate_label'>Geplaatst op</label>
+            <label index='tstamp_label'>Laatst gewijzigd op</label>
 			<label index='reference_label'>Referentie</label>
 			<label index='job_title_label'>Functienaam</label>
 			<label index='employer_label'>Werkgever</label>
@@ -129,6 +131,7 @@
 			<label index='letter_label'>Ihr Schreiben mitsenden</label>
             <label index='file_label'>Ihren Akte mitsenden</label>
 			<label index='crdate_label'>Eingestellt am</label>
+            <label index='tstamp_label'>Modified on</label>
 			<label index='reference_label'>Kennziffer</label>
 			<label index='job_title_label'>Stellenbeschreibung</label>
 			<label index='employer_label'>Arbeitgeber</label>
@@ -185,6 +188,7 @@
 			<label index='letter_label'>Upload your letter</label>
             <label index='file_label'>Upload your file</label>
 			<label index='crdate_label'>Добавлено</label>
+            <label index='tstamp_label'>Last modified on</label>
 			<label index='reference_label'>Номер</label>
 			<label index='job_title_label'>Название вакансии</label>
 			<label index='employer_label'>Наниматель</label>
@@ -238,6 +242,7 @@
 			<label index="letter_label">Załaduj swój list motywacyjny</label>
             <label index='file_label'>Upload your file</label>
 			<label index="crdate_label">Dodane</label>
+            <label index='tstamp_label'>Modified on</label>
 			<label index="reference_label">Numer referencyjny</label>
 			<label index="job_title_label">Stanowisko</label>
 			<label index="employer_label">Zatrudniający</label>
@@ -291,6 +296,7 @@
 			<label index='letter_label'>Upload din ansøgning</label>
             <label index='file_label'>Upload your file</label>
 			<label index='crdate_label'>Oprettet den</label>
+            <label index='tstamp_label'>Modified on</label>
 			<label index='reference_label'>Referance nummer</label>
 			<label index='job_title_label'>Job titel</label>
 			<label index='employer_label'>Arbejdsgiver</label>

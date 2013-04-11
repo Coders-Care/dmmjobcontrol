@@ -696,6 +696,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
     function getLabels() {
         $labelMarkers = array(
             'CRDATE_LABEL',
+            'TSTAMP_LABEL',
             'REFERENCE_LABEL',
             'JOB_TITLE_LABEL',
             'EMPLOYER_LABEL',
@@ -1018,6 +1019,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
         $markerArray['###UID###'] = $this->cObj->stdWrap($row['uid'], $this->conf['uid_stdWrap.']);
         $markerArray['###CRDATE###'] = $this->cObj->stdWrap($row['crdate'], $this->conf['crdate_stdWrap.']);
+        $markerArray['###TSTAMP###'] = $this->cObj->stdWrap($row['tstamp'], $this->conf['tstamp_stdWrap.']);
         $markerArray['###EMPLOYER###'] = $this->cObj->stdWrap($row['employer'], $this->conf['employer_stdWrap.']);
         $markerArray['###EMPLOYER_DESCRIPTION###'] = $this->cObj->stdWrap($row['employer_description'], $this->conf['employer_description_stdWrap.']);
         $markerArray['###SHORT_JOB_DESCRIPTION###'] = $this->cObj->stdWrap($row['short_job_description'], $this->conf['short_job_description_stdWrap.']);
@@ -1187,6 +1189,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         // Relate labels and values
         $label_values = array(
             'CRDATE_LABEL',
+            'TSTAMP_LABEL',
             'REFERENCE_LABEL',
             'JOB_TITLE_LABEL',
             'EMPLOYER_LABEL',
