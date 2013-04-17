@@ -23,20 +23,8 @@ JobControl was [originally created in 2007](http://mixedcase.nl/articles/2013/04
 ## Documentation
 You can read the documentation online at http://mixedcase.nl/projects/dmmjobcontrol/.
 
-## How to contribute
-Feel free to fork the code at https://github.com/kevinrenskers/dmmjobcontrol and code away. Submit a pull request and don't forget to add yourself to AUTHORS.
-
-As I don't use TYPO3 myself anymore, new features will either have to come from the community, or have to be sponsored.
-
-### Bug tracker
-Found a bug? Please file an issue at https://github.com/kevinrenskers/dmmjobcontrol/issues.
-
 ## Support
-Please use the [mailing lists](http://typo3.org/support/mailing-lists/)  for free support, or [contact me](http://mixedcase.nl/about/) directly for paid support.
-
-As I still don't use PHP or TYPO3 myself, maintaining JobControl is purely a hobby and most new features will need to come from the community. I'll keep it bug free, but can't give free support for example.
-
-If you have a feature request, forking the code and building it yourself is probably the best solution. Just send a pull request to get your code into the extension. Or, you can hire me to do the work.
+Please see [the documentation's support page](http://mixedcase.nl/projects/dmmjobcontrol/support) for information about reporting bugs, requesting new features and contributing to JobControl.
 
 ## License
 JobControl is free software under the terms of the
