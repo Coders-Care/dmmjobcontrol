@@ -431,7 +431,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
      */
     function displayDetail($applyOnly = false) {
         if (isset($this->piVars['ref']) && $this->piVars['ref']) {
-            // Find the job_uid by searching the refence number
+            // Find the job_uid by searching the reference number
             $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid', 'tx_dmmjobcontrol_job', 'reference='.$GLOBALS['TYPO3_DB']->fullQuoteStr($this->piVars['ref'], 'tx_dmmjobcontrol_job').' AND '.$this->whereAdd);
             if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
                 $this->piVars['job_uid'] = $row['uid'];
@@ -464,7 +464,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
                     $markerArray = $labels + $jobData;
                 }
 
-                // Process the form: send out email
+                // Process the apply form: send out email
                 if (isset($this->piVars['apply_submit'])) {
                     // Get the apply templates
                     $this->templateCode = $this->cObj->fileResource($this->conf['template.']['apply']);
@@ -491,6 +491,13 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
                     if (isset($this->conf['htmlmail']) && $this->conf['htmlmail']) {
                         $markerArray['###MOTIVATION_VALUE###'] = nl2br($this->piVars['apply']['motivation']);
+                    }
+
+                    // Extend the markerArray with user function?
+                    if (isset($this->conf['applyArrayFunction']) && $this->conf['applyArrayFunction']) {
+                        $funcConf = $this->conf['applyArrayFunction.'];
+                        $funcConf['parent'] = & $this;
+                        $markerArray = $this->cObj->callUserFunction($this->conf['applyArrayFunction'], $funcConf, $markerArray);
                     }
 
                     $subject = $this->pi_getLL('apply_email_subject').$row['job_title'];
@@ -797,20 +804,10 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $markerArray['###JOB_TYPE_SELECT###'] = $this->getFormSelect('job_type');
         $markerArray['###SEARCH_NAME###'] = 'tx_dmmjobcontrol_pi1[search_submit]';
         $markerArray['###RESET_NAME###'] = 'tx_dmmjobcontrol_pi1[reset_submit]';
-        $markerArray['###FULLNAME_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][fullname]';
-        $markerArray['###EMAIL_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][email]';
         $markerArray['###KEYWORD_NAME###'] = 'tx_dmmjobcontrol_pi1[search][keyword]';
-        $markerArray['###FULLNAME_VALUE###'] = '';
-        $markerArray['###EMAIL_VALUE###'] = '';
 
         $session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->prefixId);
         $markerArray['###KEYWORD_VALUE###'] = $session['search']['keyword'];
-
-        // Logged in FE user?
-        if ($GLOBALS["TSFE"]->loginUser) {
-            $markerArray['###FULLNAME_VALUE###'] = $GLOBALS['TSFE']->fe_user->user['name'];
-            $markerArray['###EMAIL_VALUE###'] = $GLOBALS['TSFE']->fe_user->user['email'];
-        }
 
         // Extend the markerArray with user function?
         if (isset($this->conf['searchArrayFunction']) && $this->conf['searchArrayFunction']) {
@@ -909,17 +906,18 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $GLOBALS['TSFE']->fe_user->setKey('ses', $this->prefixId, $session);
 
         $markerArray['###FULLNAME_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][fullname]';
-        $markerArray['###EMAIL_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][email]';
         $markerArray['###FULLNAME_VALUE###'] = '';
+        $markerArray['###EMAIL_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][email]';
         $markerArray['###EMAIL_VALUE###'] = '';
         $markerArray['###MOTIVATION_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][motivation]';
+        $markerArray['###MOTIVATION_VALUE###'] = '';
         $markerArray['###CV_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][cv]';         # backwards compatibility
         $markerArray['###LETTER_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file][letter]'; # backwards compatibility
         $markerArray['###FILE_UPLOAD_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][file]';
         $markerArray['###APPLY_NAME###'] = 'tx_dmmjobcontrol_pi1[apply_submit]';
         $markerArray['###JOB_UID_NAME###'] = 'tx_dmmjobcontrol_pi1[job_uid]';
         $markerArray['###JOB_UID_VALUE###'] = (int)$this->piVars['job_uid'];
-        $markerArray['###JOB_UID###'] = $this->piVars['job_uid']; // backward compat.
+        $markerArray['###JOB_UID###'] = $this->piVars['job_uid']; // backward compatibility
         $markerArray['###SPAMBLOCK_NAME###'] = 'tx_dmmjobcontrol_pi1[sessioncheck]';
         $markerArray['###SPAMBLOCK_VALUE###'] = $spamBlockValue;
 
@@ -927,6 +925,13 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         if ($GLOBALS["TSFE"]->loginUser) {
             $markerArray['###FULLNAME_VALUE###'] = $GLOBALS['TSFE']->fe_user->user['name'];
             $markerArray['###EMAIL_VALUE###'] = $GLOBALS['TSFE']->fe_user->user['email'];
+        }
+
+        // Extend the markerArray with user function?
+        if (isset($this->conf['applyArrayFunction']) && $this->conf['applyArrayFunction']) {
+            $funcConf = $this->conf['applyArrayFunction.'];
+            $funcConf['parent'] = & $this;
+            $markerArray = $this->cObj->callUserFunction($this->conf['applyArrayFunction'], $funcConf, $markerArray);
         }
 
         return $this->cObj->substituteMarkerArrayCached($template, $markerArray);

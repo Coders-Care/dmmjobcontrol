@@ -1,3 +1,8 @@
+2013-05-09 Kevin Renskers [mixedCase]
+* Version 2.11.0
+* Feature: it's now possible to extend the apply form
+  (thanks Heller und Kuschel GbR for sponsoring the development)
+
 2013-04-11 Kevin Renskers [mixedCase]
 * Version 2.10.0
 * Feature: added ###TSTAMP### marker and ###TSTAMP_LABEL### label
