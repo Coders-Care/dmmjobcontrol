@@ -24,7 +24,7 @@ function user_applyArrayFunction($markerArray, $conf) {
     // labelArrayFunction function. See documentation.
 
     $markerArray['###TEST_NAME###'] = 'tx_dmmjobcontrol_pi1[apply][test]';
-    $markerArray['###TEST_VALUE###'] = '';
+    $markerArray['###TEST_VALUE###'] = $conf['parent']->piVars['apply']['test'];
 
     // IMPORTANT! Return the extended markerArray.
     // If you don't return this, nothing will be parsed by JobControl at all.
