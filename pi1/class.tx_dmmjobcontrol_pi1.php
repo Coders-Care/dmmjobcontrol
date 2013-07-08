@@ -40,7 +40,6 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
     var $prefixId = 'tx_dmmjobcontrol_pi1'; // Same as class name
     var $scriptRelPath = 'pi1/class.tx_dmmjobcontrol_pi1.php'; // Path to this script relative to the extension dir.
     var $extKey = 'dmmjobcontrol';    // The extension key.
-    var $pi_checkCHash = true;
     var $flexform = false;
     var $conf = false;
     var $startpoint;
@@ -55,7 +54,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
     /**
      * The main method that gets called when the plugin is showed in the frontend.
-     * This function will find out what to show on screen, call the approprioate functions and return the html
+     * This function will find out what to show on screen, call the appropriate functions and return the html
      *
      * @param string $content The plugin content
      * @param array $conf The plugin configuration (TS)
@@ -66,10 +65,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $this->pi_loadLL(); // Loading language-labels
         $this->pi_setPiVarDefaults(); // Set default piVars from TS
         $this->pi_initPIflexForm(); // Init FlexForm configuration for plugin
-
-        // Disable caching
-        $this->pi_USER_INT_obj = 1;
-        $GLOBALS['TSFE']->set_no_cache();
+        $this->pi_USER_INT_obj = false;
+        $this->pi_checkCHash = true;
 
         // Load the complete TCA array into the global var $TCA, so we can find out what type a certain field is etc.
         // This will also include the config of user-created fields in extending plugins
