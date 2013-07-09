@@ -3,7 +3,7 @@
 *  Copyright notice
 *
 *  (c) 2007-2010 DMM Websolutions
-*  (c) 2011-2012 Kevin Renskers
+*  (c) 2011-2013 Kevin Renskers
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,9 +37,11 @@ require_once(t3lib_extMgm::extPath('lang').'lang.php');
  */
 
 class tx_dmmjobcontrol_pi1 extends tslib_pibase {
-    var $prefixId = 'tx_dmmjobcontrol_pi1'; // Same as class name
-    var $scriptRelPath = 'pi1/class.tx_dmmjobcontrol_pi1.php'; // Path to this script relative to the extension dir.
-    var $extKey = 'dmmjobcontrol';    // The extension key.
+    var $prefixId = 'tx_dmmjobcontrol_pi1';
+    var $scriptRelPath = 'pi1/class.tx_dmmjobcontrol_pi1.php';
+    var $extKey = 'dmmjobcontrol';
+    var $pi_checkCHash = true;
+    var $pi_USER_INT_obj = false;
     var $flexform = false;
     var $conf = false;
     var $startpoint;
@@ -62,11 +64,9 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
      */
     function main($content, $conf)    {
         $this->conf = $conf; //store configuration
-        $this->pi_loadLL(); // Loading language-labels
         $this->pi_setPiVarDefaults(); // Set default piVars from TS
+        $this->pi_loadLL(); // Loading language-labels
         $this->pi_initPIflexForm(); // Init FlexForm configuration for plugin
-        $this->pi_USER_INT_obj = false;
-        $this->pi_checkCHash = true;
 
         // Load the complete TCA array into the global var $TCA, so we can find out what type a certain field is etc.
         // This will also include the config of user-created fields in extending plugins
@@ -121,7 +121,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
             $GLOBALS['TSFE']->fe_user->setKey('ses', $this->prefixId, $searchArray);
 
             // Redirect to the list page to solve the expired page problem
-            $listurl = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id));
+            $listurl = $this->cachedLinkToPage($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id);
             header('Location: '.$listurl);
         }
 
@@ -173,6 +173,11 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         } else {
             return $this->pi_wrapInBaseClass($content);
         }
+    }
+
+    function cachedLinkToPage($pageId, $params=array()) {
+        $this->pi_linkTP($pageId, $params, 1);
+        return $GLOBALS['TSFE']->baseUrlWrap($this->cObj->lastTypoLinkUrl);
     }
 
     /**
@@ -777,7 +782,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $markerArray['###RSS_TITLE###'] = $this->cObj->stdWrap($this->conf['rss.']['title'], $this->conf['rss_title_stdWrap.']);
         $markerArray['###RSS_DESCRIPTION###'] = $this->cObj->stdWrap($this->conf['rss.']['description'], $this->conf['rss_description_stdWrap.']);
         $markerArray['###RSS_IMAGE###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->IMG_RESOURCE(array('file' => $this->conf['rss.']['image'])));
-        $markerArray['###LINKTOLIST###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id));
+        $markerArray['###LINKTOLIST###'] = $this->cachedLinkToPage($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id);
         $markerArray['###LANGUAGE###'] = $GLOBALS['TSFE']->config['config']['language'];
         $markerArray['###NO_JOBS_FOUND###'] = $this->pi_getLL('no_jobs_found');
 
@@ -791,7 +796,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
      * @return array Array containing all the markers and their values
      */
     function getFormData() {
-        $markerArray['###FORM_ATTRIBUTES###'] = ' action="'.$this->cObj->getTypoLink_URL($this->conf['pid.']['list']?$this->conf['pid.']['list']:$GLOBALS['TSFE']->id).'" method="post" ';
+        $markerArray['###FORM_ATTRIBUTES###'] = ' action="'.$this->cachedLinkToPage($this->conf['pid.']['list']?$this->conf['pid.']['list']:$GLOBALS['TSFE']->id).'" method="post" ';
         $markerArray['###SECTOR_SELECT###'] = $this->getFormSelect('sector');
         $markerArray['###REGION_SELECT###'] = $this->getFormSelect('region');
         $markerArray['###CATEGORY_SELECT###'] = $this->getFormSelect('category');
@@ -1029,9 +1034,9 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $markerArray['###JOB_BENEFITS###'] = $this->cObj->stdWrap($row['job_benefits'], $this->conf['job_benefits_stdWrap.']);
         $markerArray['###APPLY_INFORMATION###'] = $this->cObj->stdWrap($row['apply_information'], $this->conf['apply_information_stdWrap.']);
         $markerArray['###SALARY###'] = $this->cObj->stdWrap($row['salary'], $this->conf['salary_stdWrap.']);
-        $markerArray['###LINKTODETAIL###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['detail'] ? $this->conf['pid.']['detail'] : $GLOBALS['TSFE']->id, array( 'tx_dmmjobcontrol_pi1[job_uid]' => $row['uid'] )));
-        $markerArray['###LINKTOAPPLY###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['apply'] ? $this->conf['pid.']['apply'] : $GLOBALS['TSFE']->id, array( 'tx_dmmjobcontrol_pi1[job_uid]' => $row['uid'] )));
-        $markerArray['###LINKTOLIST###'] = $GLOBALS['TSFE']->baseUrlWrap($this->cObj->getTypoLink_URL($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id));
+        $markerArray['###LINKTODETAIL###'] = $this->cachedLinkToPage($this->conf['pid.']['detail'] ? $this->conf['pid.']['detail'] : $GLOBALS['TSFE']->id, array( 'tx_dmmjobcontrol_pi1[job_uid]' => $row['uid'] ));
+        $markerArray['###LINKTOAPPLY###'] = $this->cachedLinkToPage($this->conf['pid.']['apply'] ? $this->conf['pid.']['apply'] : $GLOBALS['TSFE']->id, array( 'tx_dmmjobcontrol_pi1[job_uid]' => $row['uid'] ));
+        $markerArray['###LINKTOLIST###'] = $this->cachedLinkToPage($this->conf['pid.']['list'] ? $this->conf['pid.']['list'] : $GLOBALS['TSFE']->id);
         $markerArray['###JOB_TYPE###'] = $this->cObj->stdWrap($GLOBALS['TSFE']->sL('LLL:EXT:dmmjobcontrol/locallang_db.xml:tx_dmmjobcontrol_job.job_type.I.'.$row['job_type']), $this->conf['job_type_stdWrap.']);
         $markerArray['###CONTRACT_TYPE###'] = $this->cObj->stdWrap($GLOBALS['TSFE']->sL('LLL:EXT:dmmjobcontrol/locallang_db.xml:tx_dmmjobcontrol_job.contract_type.I.'.$row['contract_type']), $this->conf['contract_type_stdWrap.']);
 
