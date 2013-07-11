@@ -176,7 +176,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
     }
 
     function cachedLinkToPage($pageId, $params=array()) {
-        $this->pi_linkTP($pageId, $params, 1);
+        $this->pi_linkTP("|", $params, 1, $pageId);
         return $GLOBALS['TSFE']->baseUrlWrap($this->cObj->lastTypoLinkUrl);
     }
 
