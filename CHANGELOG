@@ -1,3 +1,8 @@
+2013-07-30 Kevin Renskers [mixedCase]
+* Version 2.13.0
+* Bugfix: prevent double apply form submits when including both the detail plugin and the apply plugin on the same page
+* Bugfix: prevent caching of the detail page when the apply form was submitted
+
 2013-07-11 Kevin Renskers [mixedCase]
 * Version 2.12.1
 * Bugfix: links to detail pages were broken when "road 1" was used

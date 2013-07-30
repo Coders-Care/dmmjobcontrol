@@ -467,7 +467,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
                 }
 
                 // Process the apply form: send out email
-                if (isset($this->piVars['apply_submit'])) {
+                if (isset($this->piVars['apply_submit']) && ($applyOnly || $this->conf['apply.']['form'] != 0)) {
                     // Get the apply templates
                     $this->templateCode = $this->cObj->fileResource($this->conf['template.']['apply']);
                     if (is_null($this->templateCode)) {
@@ -855,7 +855,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
                 }
             }';
 
-        $markerArray['###FORM_ATTRIBUTES###'] = ' enctype="multipart/form-data" action="'.$this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id, array('tx_dmmjobcontrol_pi1[job_uid]' => $this->piVars['job_uid'])).'" method="post" ';
+        $link = $this->cachedLinkToPage($GLOBALS['TSFE']->id, array('tx_dmmjobcontrol_pi1[job_uid]' => $this->piVars['job_uid'], 'no_cache' => '1'));
+        $markerArray['###FORM_ATTRIBUTES###'] = ' enctype="multipart/form-data" action="'.$link.'" method="post" ';
         if ($this->conf['apply.']['form'] == 1) {
             $markerArray['###FORM_ATTRIBUTES###'] .= 'style="display:none" ';
         }
