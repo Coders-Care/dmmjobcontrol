@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "dmmjobcontrol".
  *
- * Auto generated 25-08-2013 11:49
+ * Auto generated 25-08-2013 11:50
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next
@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Job database to show job offers on your site. Paginated lists, detailview, search function, apply form and RSS. It is possible to show the most recent jobs and/or the searchform on all pages. Easy to setup yet powerful and flexible. Please ask for free support on the mailing lists, or contact the owner for paid support.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '2.13.1',
+	'version' => '2.14.0',
 	'dependencies' => 'cms',
 	'conflicts' => '',
 	'priority' => '',
