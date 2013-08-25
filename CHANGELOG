@@ -1,3 +1,8 @@
+2013-08-25 Kevin Renskers [mixedCase]
+* Version 2.14.0
+* Disabled all caching, essentially going back to the behaviour of 2.11.0 and before.
+* Contributions to properly deal with caching are greatly appreciated!
+
 2013-07-30 Kevin Renskers [mixedCase]
 * Version 2.13.0
 * Bugfix: prevent double apply form submits when including both the detail plugin and the apply plugin on the same page
