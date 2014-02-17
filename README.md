@@ -24,9 +24,14 @@ JobControl was [originally created in 2007](http://mixedcase.nl/articles/2013/04
 You can read the documentation online at http://mixedcase.nl/projects/dmmjobcontrol/.
 
 ## Support
-Please see [the documentation's support page](http://mixedcase.nl/projects/dmmjobcontrol/support) for information about reporting bugs, requesting new features and contributing to JobControl.
+Please see [the documentation's support page](http://mixedcase.nl/projects/dmmjobcontrol/support) for information about reporting bugs, requesting new features and contributing to JobControl. As I don't use PHP or TYPO3 myself anymore, I'm basically only fixing critical bugs, all other development will have to come from the community. 
 
 ## License
 JobControl is free software under the terms of the
 GNU General Public License version 2 or any later version.
 The GNU/GPL license (version 2) is found in the file LICENSE.
+
+# Contributors wanted!
+As I don't use PHP or TYPO3 myself anymore, it's becoming a bit of a burden to support JobControl and release bugfixes, support new versions of TYPO3, etc. If you'd like to support this open source project please feel free to fork the code and tackle any open issues, fix bugs, support the new TYPO3 features, add translations, or anything else you can think of. Push access will be given to regular contributors.
+
+If you'd like to adopt JobControl please [contact me](https://github.com/kevinrenskers).
