@@ -23,8 +23,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_t3lib.'mail/class.t3lib_mail_message.php');
-require_once(PATH_tslib.'class.tslib_pibase.php');
 require_once(t3lib_extMgm::extPath('lang').'lang.php');
 
 /**
