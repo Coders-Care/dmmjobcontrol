@@ -252,8 +252,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
                     if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'])) {
                         $table = $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'];
                         $tableAdd[] = $table;
-                        $whereAdd[] = $table.'.uid_local=tx_dmmjobcontrol_job.uid AND ('.$table.'.uid_foreign='.implode(' OR '.$table.'.uid_foreign=', $value).')';
-
+                        $whereAdd[] = $table.'.uid_local=tx_dmmjobcontrol_job.uid AND ('.$table.'.uid_foreign='.implode(' OR '.$table.'.uid_foreign=', intval($value)).')';
                     } elseif ($field == 'keyword') {
                         $keywords = str_replace(array(','), ' ', $value);
                         $keywords = explode(' ', $keywords);
@@ -807,7 +806,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $markerArray['###KEYWORD_NAME###'] = 'tx_dmmjobcontrol_pi1[search][keyword]';
 
         $session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->prefixId);
-        $markerArray['###KEYWORD_VALUE###'] = $session['search']['keyword'];
+        $markerArray['###KEYWORD_VALUE###'] = htmlspecialchars($session['search']['keyword'], ENT_QUOTES);
 
         // Extend the markerArray with user function?
         if (isset($this->conf['searchArrayFunction']) && $this->conf['searchArrayFunction']) {
