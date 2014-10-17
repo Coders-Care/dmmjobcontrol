@@ -1,6 +1,8 @@
 2014-10-17 Kevin Renskers [mixedCase]
 * Version 2.15.0
 * Secutiry bugfix, thank you weber-ebusiness for the pull request!
+* 6.2 LTS compatibilty
+* Enable backend search
 
 2013-08-25 Kevin Renskers [mixedCase]
 * Version 2.14.0
