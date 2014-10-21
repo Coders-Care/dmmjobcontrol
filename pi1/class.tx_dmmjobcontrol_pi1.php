@@ -39,7 +39,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
     var $scriptRelPath = 'pi1/class.tx_dmmjobcontrol_pi1.php';
     var $extKey = 'dmmjobcontrol';
     var $pi_checkCHash = 0;
-    var $pi_USER_INT_obj = 1;
+    var $pi_USER_INT_obj = 0;
     var $flexform = false;
     var $conf = false;
     var $startpoint;
@@ -250,9 +250,12 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
                     }
 
                     if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'])) {
+                        $value = static::stripSlashes($value);
+                        $value = static::decodeEntities($value);
+                        $value = static::xssClean($value, true); 
                         $table = $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'];
                         $tableAdd[] = $table;
-                        $whereAdd[] = $table.'.uid_local=tx_dmmjobcontrol_job.uid AND ('.$table.'.uid_foreign='.implode(' OR '.$table.'.uid_foreign=', intval($value)).')';
+                        $whereAdd[] = $table.'.uid_local=tx_dmmjobcontrol_job.uid AND ('.$table.'.uid_foreign='.implode(' OR '.$table.'.uid_foreign=', $value).')';                     
                     } elseif ($field == 'keyword') {
                         $keywords = str_replace(array(','), ' ', $value);
                         $keywords = explode(' ', $keywords);
@@ -806,7 +809,10 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $markerArray['###KEYWORD_NAME###'] = 'tx_dmmjobcontrol_pi1[search][keyword]';
 
         $session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->prefixId);
-        $markerArray['###KEYWORD_VALUE###'] = htmlspecialchars($session['search']['keyword'], ENT_QUOTES);
+        
+        $markerArray['###KEYWORD_VALUE###'] = static::stripSlashes($session['search']['keyword']);
+        $markerArray['###KEYWORD_VALUE###'] = static::decodeEntities($markerArray['###KEYWORD_VALUE###']);
+        $markerArray['###KEYWORD_VALUE###'] = static::xssClean($markerArray['###KEYWORD_VALUE###'], true);
 
         // Extend the markerArray with user function?
         if (isset($this->conf['searchArrayFunction']) && $this->conf['searchArrayFunction']) {
@@ -1238,10 +1244,282 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $markerArray = $labels + $values;
         return $markerArray;
     }
+    
+
+    /**
+     * Strip slashes
+     *
+     * @param mixed $varValue A string or array
+     *
+     * @return mixed The string or array without slashes
+     */
+    public static function stripSlashes($varValue)
+    {
+      if ($varValue == '')
+      {
+        return $varValue;
+      }
+
+      // Recursively clean arrays
+      if (is_array($varValue))
+      {
+        foreach ($varValue as $k=>$v)
+        {
+          $varValue[$k] = static::stripSlashes($v);
+        }
+
+        return $varValue;
+      }
+
+      return stripslashes($varValue);
+    } 
+       
+    
+    /**
+     * Strip HTML and PHP tags preserving HTML comments
+     *
+     * @param mixed  $varValue       A string or array
+     * @param string $strAllowedTags A string of tags to preserve
+     *
+     * @return mixed The cleaned string or array
+     */
+    public static function stripTags($varValue, $strAllowedTags='')
+    {
+      if ($varValue === null || $varValue == '')
+      {
+        return $varValue;
+      }
+
+      // Recursively clean arrays
+      if (is_array($varValue))
+      {
+        foreach ($varValue as $k=>$v)
+        {
+          $varValue[$k] = static::stripTags($v, $strAllowedTags);
+        }
+
+        return $varValue;
+      }
+
+      $varValue = str_replace(array('<!--','<![', '-->'), array('&lt;!--', '&lt;![', '--&gt;'), $varValue);
+      $varValue = strip_tags($varValue, $strAllowedTags);
+      $varValue = str_replace(array('&lt;!--', '&lt;![', '--&gt;'), array('<!--', '<![', '-->'), $varValue);
+
+      // Recheck for encoded null bytes
+      while (strpos($varValue, '\\0') !== false)
+      {
+        $varValue = str_replace('\\0', '', $varValue);
+      }
+
+      return $varValue;
+    }
+
+
+    /**
+     * Clean a value and try to prevent XSS attacks
+     *
+     * @param mixed   $varValue      A string or array
+     * @param boolean $blnStrictMode If true, the function removes also JavaScript event handlers
+     *
+     * @return mixed The cleaned string or array
+     */
+    public static function xssClean($varValue, $blnStrictMode=false)
+    {
+      if ($varValue === null || $varValue == '')
+      {
+        return $varValue;
+      }
+
+      // Recursively clean arrays
+      if (is_array($varValue))
+      {
+        foreach ($varValue as $k=>$v)
+        {
+          $varValue[$k] = static::xssClean($v);
+        }
+
+        return $varValue;
+      }
+
+      // Return if the value is not a string
+      if (is_bool($varValue) || $varValue === null || is_numeric($varValue))
+      {
+        return $varValue;
+      }
+
+      // Validate standard character entites and UTF16 two byte encoding
+      $varValue = preg_replace('/(&#*\w+)[\x00-\x20]+;/i', '$1;', $varValue);
+      $varValue = preg_replace('/(&#x*)([0-9a-f]+);/i', '$1$2;', $varValue);
+
+      // Remove carriage returns
+      $varValue = preg_replace('/\r+/', '', $varValue);
+
+      // Replace unicode entities
+      $varValue = preg_replace_callback('~&#x([0-9a-f]+);~i', 'utf8_hexchr_callback', $varValue);
+      $varValue = preg_replace_callback('~&#([0-9]+);~', 'utf8_chr_callback', $varValue);
+
+      // Remove null bytes
+      $varValue = str_replace(chr(0), '', $varValue);
+
+      // Remove encoded null bytes
+      while (strpos($varValue, '\\0') !== false)
+      {
+        $varValue = str_replace('\\0', '', $varValue);
+      }
+
+      // Define a list of keywords
+      $arrKeywords = array
+      (
+        '/\bj\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t\b/is', // javascript
+        '/\bv\s*b\s*s\s*c\s*r\s*i\s*p\s*t\b/is', // vbscript
+        '/\bv\s*b\s*s\s*c\s*r\s*p\s*t\b/is', // vbscrpt
+        '/\bs\s*c\s*r\s*i\s*p\s*t\b/is', //script
+        '/\ba\s*p\s*p\s*l\s*e\s*t\b/is', // applet
+        '/\ba\s*l\s*e\s*r\s*t\b/is', // alert
+        '/\bd\s*o\s*c\s*u\s*m\s*e\s*n\s*t\b/is', // document
+        '/\bw\s*r\s*i\s*t\s*e\b/is', // write
+        '/\bc\s*o\s*o\s*k\s*i\s*e\b/is', // cookie
+        '/\bw\s*i\s*n\s*d\s*o\s*w\b/is' // window
+      );
+
+      // Compact exploded keywords like "j a v a s c r i p t"
+      foreach ($arrKeywords as $strKeyword)
+      {
+        $arrMatches = array();
+        preg_match_all($strKeyword, $varValue, $arrMatches);
+
+        foreach ($arrMatches[0] as $strMatch)
+        {
+          $varValue = str_replace($strMatch, preg_replace('/\s*/', '', $strMatch), $varValue);
+        }
+      }
+
+      $arrRegexp[] = '/<(a|img)[^>]*[^a-z](<script|<xss)[^>]*>/is';
+      $arrRegexp[] = '/<(a|img)[^>]*[^a-z]document\.cookie[^>]*>/is';
+      $arrRegexp[] = '/<(a|img)[^>]*[^a-z]vbscri?pt\s*:[^>]*>/is';
+      $arrRegexp[] = '/<(a|img)[^>]*[^a-z]expression\s*\([^>]*>/is';
+
+      // Also remove event handlers and JavaScript in strict mode
+      if ($blnStrictMode)
+      {
+        $arrRegexp[] = '/vbscri?pt\s*:/is';
+        $arrRegexp[] = '/javascript\s*:/is';
+        $arrRegexp[] = '/<\s*embed.*swf/is';
+        $arrRegexp[] = '/<(a|img)[^>]*[^a-z]alert\s*\([^>]*>/is';
+        $arrRegexp[] = '/<(a|img)[^>]*[^a-z]javascript\s*:[^>]*>/is';
+        $arrRegexp[] = '/<(a|img)[^>]*[^a-z]window\.[^>]*>/is';
+        $arrRegexp[] = '/<(a|img)[^>]*[^a-z]document\.[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onabort\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onblur\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onchange\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onclick\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onerror\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onfocus\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onkeypress\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onkeydown\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onkeyup\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onload\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onmouseover\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onmouseup\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onmousedown\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onmouseout\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onreset\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onselect\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onsubmit\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onunload\s*=[^>]*>/is';
+        $arrRegexp[] = '/<[^>]*[^a-z]onresize\s*=[^>]*>/is';
+      }
+
+      $varValue = preg_replace($arrRegexp, '', $varValue);
+
+      // Recheck for encoded null bytes
+      while (strpos($varValue, '\\0') !== false)
+      {
+        $varValue = str_replace('\\0', '', $varValue);
+      }
+
+      return $varValue;
+    }
+
+    /**
+     * Decode HTML entities
+     *
+     * @param mixed $varValue A string or array
+     *
+     * @return mixed The decoded string or array
+     */
+    public static function decodeEntities($varValue)
+    {
+      if ($varValue === null || $varValue == '')
+      {
+        return $varValue;
+      }
+
+      // Recursively clean arrays
+      if (is_array($varValue))
+      {
+        foreach ($varValue as $k=>$v)
+        {
+          $varValue[$k] = static::decodeEntities($v);
+        }
+
+        return $varValue;
+      }
+
+      // Preserve basic entities
+      $varValue = html_entity_decode($varValue, ENT_QUOTES);
+
+      return $varValue;
+    }
+    
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dmmjobcontrol/pi1/class.tx_dmmjobcontrol_pi1.php'])    {
     include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dmmjobcontrol/pi1/class.tx_dmmjobcontrol_pi1.php']);
 }
 
-?>
+
+/**
+ * Callback function for utf8_decode_entities
+ * @param array
+ * @return string
+ */
+function utf8_hexchr_callback($matches)
+{
+  return utf8_chr(hexdec($matches[1]));
+}    
+
+/**
+ * Callback function for utf8_decode_entities
+ * @param array
+ * @return string
+ */
+function utf8_chr_callback($matches)
+{
+  return utf8_chr($matches[1]);
+}    
+
+/**
+ * Return a specific character
+ *
+ * Unicode version of chr() that handles UTF-8 characters. It is basically
+ * used as callback function for utf8_decode_entities().
+ * @param integer
+ * @return string
+ */
+function utf8_chr($dec)
+{
+  if ($dec < 128)
+    return chr($dec);
+
+  if ($dec < 2048)
+    return chr(($dec >> 6) + 192) . chr(($dec & 63) + 128);
+
+  if ($dec < 65536)
+    return chr(($dec >> 12) + 224) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
+
+  if ($dec < 2097152)
+    return chr(($dec >> 18) + 240) . chr((($dec >> 12) & 63) + 128) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
+
+  return '';
+}
