@@ -39,7 +39,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
     var $scriptRelPath = 'pi1/class.tx_dmmjobcontrol_pi1.php';
     var $extKey = 'dmmjobcontrol';
     var $pi_checkCHash = 0;
-    var $pi_USER_INT_obj = 0;
+    var $pi_USER_INT_obj = 1;
     var $flexform = false;
     var $conf = false;
     var $startpoint;
