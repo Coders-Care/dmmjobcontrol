@@ -252,7 +252,7 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
                     if (isset($TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'])) {
                         $table = $TCA['tx_dmmjobcontrol_job']['columns'][$field]['config']['MM'];
                         $tableAdd[] = $table;
-                        $whereAdd[] = $table.'.uid_local=tx_dmmjobcontrol_job.uid AND ('.$table.'.uid_foreign='.implode(' OR '.$table.'.uid_foreign=', intval($value)).')';
+                        $whereAdd[] = $table.'.uid_local=tx_dmmjobcontrol_job.uid AND ('.$table.'.uid_foreign='.implode(' OR '.$table.'.uid_foreign=', t3lib_div::removeXSS($value)).')';                     
                     } elseif ($field == 'keyword') {
                         $keywords = str_replace(array(','), ' ', $value);
                         $keywords = explode(' ', $keywords);
@@ -806,7 +806,8 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
         $markerArray['###KEYWORD_NAME###'] = 'tx_dmmjobcontrol_pi1[search][keyword]';
 
         $session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->prefixId);
-        $markerArray['###KEYWORD_VALUE###'] = htmlspecialchars($session['search']['keyword'], ENT_QUOTES);
+        
+        $markerArray['###KEYWORD_VALUE###'] = t3lib_div::removeXSS($session['search']['keyword']);
 
         // Extend the markerArray with user function?
         if (isset($this->conf['searchArrayFunction']) && $this->conf['searchArrayFunction']) {
@@ -1237,11 +1238,9 @@ class tx_dmmjobcontrol_pi1 extends tslib_pibase {
 
         $markerArray = $labels + $values;
         return $markerArray;
-    }
+    }    
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dmmjobcontrol/pi1/class.tx_dmmjobcontrol_pi1.php'])    {
     include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dmmjobcontrol/pi1/class.tx_dmmjobcontrol_pi1.php']);
 }
-
-?>
