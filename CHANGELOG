@@ -1,6 +1,11 @@
+2015-01-11 Kevin Renskers [mixedCase]
+* Version 2.16.0
+* Marked the extension as obsolete. It's been a long wild ride, but I can't support 
+  this extension anymore. If you'd like to take over please contact me at info@mixedcase.nl.
+
 2014-10-17 Kevin Renskers [mixedCase]
 * Version 2.15.0
-* Secutiry bugfix, thank you weber-ebusiness for the pull request!
+* Security bugfix, thank you weber-ebusiness for the pull request!
 * 6.2 LTS compatibilty
 * Enable backend search
 
