@@ -1,4 +1,5 @@
 # JobControl is no longer maintained! If you'd like to take over please [contact me](https://github.com/kevinrenskers).
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 ## Overview
 JobControl (dmmjobcontrol) is a TYPO3 extension for showing jobs (“vacancies”) on your website. It provides a list- and detail view and the ability to search and apply for jobs. It can even make RSS feeds of your jobs.
