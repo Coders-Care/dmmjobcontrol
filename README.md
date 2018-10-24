@@ -1,6 +1,3 @@
-# JobControl is no longer maintained! If you'd like to take over please [contact me](https://github.com/kevinrenskers).
-[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-
 ## Overview
 JobControl (dmmjobcontrol) is a TYPO3 extension for showing jobs (“vacancies”) on your website. It provides a list- and detail view and the ability to search and apply for jobs. It can even make RSS feeds of your jobs.
 
@@ -28,8 +25,3 @@ You can read the documentation online at http://mixedcase.nl/projects/dmmjobcont
 JobControl is free software under the terms of the
 GNU General Public License version 2 or any later version.
 The GNU/GPL license (version 2) is found in the file LICENSE.
-
-# Contributors wanted!
-As I don't use PHP or TYPO3 myself anymore, it's becoming a bit of a burden to support JobControl and release bugfixes, support new versions of TYPO3, etc. If you'd like to support this open source project please feel free to fork the code and tackle any open issues, fix bugs, support the new TYPO3 features, add translations, or anything else you can think of. Push access will be given to regular contributors.
-
-If you'd like to adopt JobControl please [contact me](https://github.com/kevinrenskers).
